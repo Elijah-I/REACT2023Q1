@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
-import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
+import { createHashRouter, createRoutesFromElements, Route } from 'react-router-dom';
 
 import ROUTES from 'types/routes.types';
 
@@ -16,7 +16,7 @@ import RootPage, { loader as rootLoader, action as rootAction } from 'pages/root
 import './index.css';
 
 const root = document.getElementById('root');
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route
       path={ROUTES.ROOT}

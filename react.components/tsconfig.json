@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./public",
     "target": "esnext",
     "lib": ["dom", "esnext", "dom.iterable"],
     "jsx": "react",
@@ -11,9 +12,16 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "allowJs": true,
     "skipLibCheck": true,
     "baseUrl": "./src",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "types/*": ["types/*"],
+      "pages/*": ["pages/*"],
+      "model/*": ["model/*"]
+    }
   },
-  "include": ["./src/**/*", "styled.d.ts"]
+  "exclude": ["node_modules", "build/**/*"],
+  "include": ["./src/**/*"]
 }

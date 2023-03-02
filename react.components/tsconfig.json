@@ -19,7 +19,7 @@
     "paths": {
       "types/*": ["types/*"],
       "pages/*": ["pages/*"],
-      "model/*": ["model/*"]
+      "components/*": ["components/*"]
     }
   },
   "exclude": ["node_modules", "build/**/*"],

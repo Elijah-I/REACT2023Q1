@@ -1,0 +1,28 @@
+@import '@/styles/placeholders';
+
+.error__wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error__container {
+  display: flex;
+  justify-content: center;
+}
+
+.error__block {
+  @extend %box;
+
+  padding: 0;
+  display: block;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    max-width: 100rem;
+    display: block;
+  }
+}

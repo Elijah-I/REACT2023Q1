@@ -1,0 +1,38 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+
+.header {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: $gap 0;
+  background-color: $primary-color-fone;
+}
+
+.header__container {
+  @extend %box;
+  @extend %font-upper;
+
+  height: $header-h;
+  display: flex;
+  gap: $gap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header__link {
+  color: $primary-color-font;
+  text-decoration: none;
+  transition: color 0.1s ease;
+
+  &:hover {
+    color: $primary-color-font-active;
+  }
+}
+
+.header__link--active {
+  color: $primary-color-font-active;
+  pointer-events: none;
+  cursor: default;
+}

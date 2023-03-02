@@ -1,0 +1,40 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+@import 'node_modules/normalize-scss/sass/normalize';
+
+@include normalize();
+
+html {
+  font-size: 10px;
+}
+
+body {
+  @extend %font-lower;
+
+  overflow: hidden overlay;
+
+  height: 100vh;
+  background-color: $primary-color-fone;
+}
+
+::-webkit-scrollbar {
+  width: 1.4rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba($primary-color-font-active, 0.5);
+  border-radius: 0.7rem;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: $max-w;
+  box-sizing: border-box;
+  padding: 0 $gap;
+  margin: 0 auto;
+}

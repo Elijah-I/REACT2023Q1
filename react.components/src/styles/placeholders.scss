@@ -1,0 +1,23 @@
+@import '@/styles/fonts';
+@import '@/styles/variables';
+
+%box {
+  border-radius: 5rem;
+  background: $primary-color-fone;
+  box-shadow: 2rem 2rem 6rem $primary-color-shadow, -2rem -2rem 6rem $secondary-color-shadow;
+  padding: 0 $gap;
+  box-sizing: border-box;
+}
+
+%box-inset {
+  @extend %box;
+  background: linear-gradient(145deg, #c2bde5, #e6e1ff);
+}
+
+%font-lower {
+  font: 400 1.6rem Roboto, sans-serif;
+}
+
+%font-upper {
+  font: 400 1.6rem LemonMilk, sans-serif;
+}

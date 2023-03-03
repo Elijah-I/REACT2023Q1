@@ -7,17 +7,22 @@ import SearchLine from './SearchLine';
 
 import type { SearchProps, SearchState } from 'types/search.types';
 
+import './index.scss';
+
 class Search extends React.PureComponent<SearchProps> {
   state: SearchState;
+  initialState: SearchState;
 
   constructor(props: SearchProps) {
     super(props);
 
-    this.state = {
+    this.initialState = {
       option: 0,
       space: 'local',
       search: '',
     };
+
+    this.state = this.initialState;
 
     this.makeSearch = this.makeSearch.bind(this);
     this.setSearch = this.setSearch.bind(this);
@@ -27,7 +32,7 @@ class Search extends React.PureComponent<SearchProps> {
 
   componentDidMount() {
     const state = JSON.parse(
-      localStorage.getItem('search.state') || '{"option":0,"space":"local","search":""}'
+      localStorage.getItem('search.state') || JSON.stringify(this.initialState)
     );
 
     setTimeout(() => this.props.makeSearch(state), 1000);

@@ -30,11 +30,8 @@ class Search extends React.PureComponent<SearchProps> {
 
   componentDidMount() {
     const lsState = localStorage.getItem('search.state');
-
-    if (lsState) {
-      this.setState({ ...JSON.parse(lsState) });
-      this.makeSearch();
-    }
+    if (lsState) this.setState({ ...JSON.parse(lsState) });
+    this.makeSearch();
   }
 
   componentDidUpdate() {

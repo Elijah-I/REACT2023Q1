@@ -22,7 +22,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba($primary-color-font-active, 0.5);
+  background-color: rgba($primary-color-active, 0.5);
   border-radius: 0.7rem;
 }
 
@@ -37,4 +37,10 @@ ul {
   box-sizing: border-box;
   padding: 0 $gap;
   margin: 0 auto;
+}
+
+.input {
+}
+
+.button {
 }

@@ -7,10 +7,10 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Root from 'components/root';
-import Error from 'components/error';
-import Main from 'components/main';
-import About from 'components/about';
+import Root from 'components/Root';
+import Error from 'components/Error';
+import Main from 'components/Main';
+import About from 'components/About';
 
 import ROUTES from 'types/routes.types';
 
@@ -28,9 +28,4 @@ const router = createHashRouter(
   )
 );
 
-if (root)
-  ReactDOM.createRoot(root).render(
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  );
+if (root) ReactDOM.createRoot(root).render(<RouterProvider router={router} />);

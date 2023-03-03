@@ -27,12 +27,12 @@
   transition: color 0.1s ease;
 
   &:hover {
-    color: $primary-color-font-active;
+    color: $primary-color-active;
   }
 }
 
 .header__link--active {
-  color: $primary-color-font-active;
+  color: $primary-color-active;
   pointer-events: none;
   cursor: default;
 }

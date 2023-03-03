@@ -12,3 +12,10 @@
   padding: 3rem;
   margin-top: calc($gap * 2);
 }
+
+.cards__list {
+  display: grid;
+  gap: $gap;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, calc(25% - $gap * 3 / 4)));
+  margin-top: calc($gap * 2);
+}

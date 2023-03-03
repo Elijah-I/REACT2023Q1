@@ -11,5 +11,57 @@
       "likes": 17,
       "isFavorite": false
     }
+  },
+  {
+    "id": 1,
+    "title": "Card #2",
+    "author": "Elijah",
+    "type": "photo",
+    "tags": ["Nature", "Sun", "Sea", "Beach"],
+    "picture": "",
+    "statistic": {
+      "views": 11585,
+      "likes": 2585,
+      "isFavorite": false
+    }
+  },
+  {
+    "id": 2,
+    "title": "Card #3",
+    "author": "Neo",
+    "type": "video",
+    "tags": ["Matrix", "Future tech", "AI"],
+    "picture": "",
+    "statistic": {
+      "views": 5236959,
+      "likes": 54862,
+      "isFavorite": false
+    }
+  },
+  {
+    "id": 3,
+    "title": "Card #4",
+    "author": "Joxi",
+    "type": "post",
+    "tags": ["Pring Screen", "Motion capture", "Cloud share"],
+    "picture": "",
+    "statistic": {
+      "views": 128,
+      "likes": 5,
+      "isFavorite": false
+    }
+  },
+  {
+    "id": 4,
+    "title": "Card #5",
+    "author": "Redux",
+    "type": "post",
+    "tags": ["State managment", "Modern tech", "No MOBX here"],
+    "picture": "",
+    "statistic": {
+      "views": 22852,
+      "likes": 4583,
+      "isFavorite": false
+    }
   }
 ]

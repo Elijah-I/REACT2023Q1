@@ -10,11 +10,11 @@ class Cards extends React.PureComponent<CardsProps> {
     }
 
     return (
-      <>
+      <div className="cards__list">
         {this.props.cards.map((card) => (
           <Card key={card.id} info={card} />
         ))}
-      </>
+      </div>
     );
   }
 }

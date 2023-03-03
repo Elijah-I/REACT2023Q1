@@ -4,7 +4,7 @@ import './index.scss';
 
 class Card extends React.PureComponent<CardProps> {
   render() {
-    return <div>{Object.values(this.props.info).join(' / ')}</div>;
+    return <div className="card">{Object.values(this.props.info).join(' / ')}</div>;
   }
 }
 

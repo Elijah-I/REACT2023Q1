@@ -3,3 +3,10 @@
 .main {
   margin-top: calc($gap * 2);
 }
+
+.main__loader {
+  margin-top: calc($gap * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

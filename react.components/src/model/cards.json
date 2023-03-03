@@ -1,0 +1,15 @@
+[
+  {
+    "id": 0,
+    "title": "Card #1",
+    "author": "Elijah",
+    "type": "photo",
+    "tags": ["IT", "SEO", "Listing"],
+    "picture": "",
+    "statistic": {
+      "views": 524,
+      "likes": 17,
+      "isFavorite": false
+    }
+  }
+]

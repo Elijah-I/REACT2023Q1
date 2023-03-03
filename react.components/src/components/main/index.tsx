@@ -2,6 +2,7 @@ import React from 'react';
 
 import Search from 'components/Search';
 import Loader from 'components/Loader';
+import Cards from 'components/Cards';
 
 import { SearchState } from 'types/search.types';
 import { MainState } from 'types/main.types';
@@ -16,10 +17,15 @@ class Main extends React.PureComponent {
 
     this.state = {
       search: null,
-      cards: [],
+      cards: null,
     };
 
     this.makeSearch = this.makeSearch.bind(this);
+    this.getCards = this.getCards.bind(this);
+  }
+
+  componentDidMount() {
+    this.getCards();
   }
 
   makeSearch(searchState: SearchState | null) {
@@ -29,11 +35,25 @@ class Main extends React.PureComponent {
     });
   }
 
+  async getCards() {
+    this.setState({
+      ...this.state,
+      cards: (await import('./../../model/cards.json')).default,
+    });
+  }
+
   render() {
     return (
       <div className="main">
         <Search makeSearch={this.makeSearch} />
-        {this.state.search ? <div>cards</div> : <Loader />}
+
+        {this.state.search && this.state.cards ? (
+          <Cards cards={this.state.cards} />
+        ) : (
+          <div className="main__loader">
+            <Loader />
+          </div>
+        )}
       </div>
     );
   }

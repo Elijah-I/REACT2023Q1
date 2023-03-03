@@ -1,46 +1,34 @@
 import React from 'react';
 import { OPTION, OptionsProps } from 'types/search.types';
 
-class Options extends React.Component<OptionsProps> {
+import './index.scss';
+
+class Options extends React.PureComponent<OptionsProps> {
   render() {
     return (
-      <div>
-        <div className="radio radio--icon">
-          <input
-            type="radio"
-            name="option"
-            value={OPTION.ALL}
-            checked={this.props.option === OPTION.ALL}
-            onChange={this.props.setOption}
-          />
-        </div>
-        <div className="radio radio--icon">
-          <input
-            type="radio"
-            name="option"
-            value={OPTION.PHOTO}
-            checked={this.props.option === OPTION.PHOTO}
-            onChange={this.props.setOption}
-          />
-        </div>
-        <div className="radio radio--icon">
-          <input
-            type="radio"
-            name="option"
-            value={OPTION.POST}
-            checked={this.props.option === OPTION.POST}
-            onChange={this.props.setOption}
-          />
-        </div>
-        <div className="radio radio--icon">
-          <input
-            type="radio"
-            name="option"
-            value={OPTION.VIDEO}
-            checked={this.props.option === OPTION.VIDEO}
-            onChange={this.props.setOption}
-          />
-        </div>
+      <div className="search__options">
+        {Object.keys(OPTION).map((optKey, key) => {
+          const option = OPTION[optKey as keyof typeof OPTION];
+
+          return (
+            <div className="radio" key={key}>
+              <input
+                type="radio"
+                name="option"
+                id={`option-${option}`}
+                value={option}
+                checked={this.props.option === option}
+                onChange={this.props.setOption}
+              />
+              <label
+                htmlFor={`option-${option}`}
+                className={`icon icon--${option} ${
+                  this.props.option === option ? 'icon--seletced' : ''
+                }`}
+              ></label>
+            </div>
+          );
+        })}
       </div>
     );
   }

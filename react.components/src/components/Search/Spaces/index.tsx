@@ -1,10 +1,11 @@
 import React from 'react';
 import type { SpacesProps } from 'types/search.types';
+import './index.scss';
 
-class Spaces extends React.Component<SpacesProps> {
+class Spaces extends React.PureComponent<SpacesProps> {
   render() {
     return (
-      <div>
+      <div className="search__spaces">
         <div className="radio">
           <input
             type="radio"

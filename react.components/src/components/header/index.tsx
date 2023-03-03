@@ -10,7 +10,7 @@ interface HeaderLink {
   href: ROUTES;
 }
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
   links: HeaderLink[];
 
   constructor(props: object) {

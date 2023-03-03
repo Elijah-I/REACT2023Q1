@@ -1,0 +1,83 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+
+.search__wrapper {
+  @extend %box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: $gap;
+  padding: calc($gap * 3) $gap;
+}
+
+.search__line,
+.search__config {
+  width: 100%;
+  max-width: 75rem;
+}
+
+.search__config {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  justify-content: space-between;
+}
+
+.icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  padding-left: 0 !important;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  &::after,
+  &::before {
+    display: none;
+    visibility: hidden;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.icon--seletced {
+  opacity: 1;
+  position: relative;
+
+  &::after {
+    content: '';
+    width: auto !important;
+    height: auto !important;
+    border: 5px solid transparent;
+    border-bottom: 5px solid $primary-color-active;
+    position: absolute;
+    left: calc(50% - 0.5rem) !important;
+    bottom: -1rem;
+    visibility: visible;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+  }
+}
+
+.icon--all {
+  background-image: URL('/src/assets/icons/search.svg');
+}
+
+.icon--photo {
+  background-image: URL('/src/assets/icons/photo.svg');
+}
+
+.icon--post {
+  background-size: 70%;
+  background-image: URL('/src/assets/icons/post.svg');
+}
+
+.icon--video {
+  background-image: URL('/src/assets/icons/video.svg');
+}

@@ -6,33 +6,35 @@ import Loader from 'components/Loader';
 import { SearchState } from 'types/search.types';
 import { MainState } from 'types/main.types';
 
-class Main extends React.Component {
+import './index.scss';
+
+class Main extends React.PureComponent {
   state: MainState;
 
   constructor(props: object) {
     super(props);
 
     this.state = {
-      search: {} as SearchState,
+      search: null,
       cards: [],
     };
 
     this.makeSearch = this.makeSearch.bind(this);
   }
 
-  makeSearch(searchState: SearchState) {
+  makeSearch(searchState: SearchState | null) {
     this.setState({
       ...this.state,
-      search: searchState,
+      search: searchState || null,
     });
   }
 
   render() {
     return (
-      <>
+      <div className="main">
         <Search makeSearch={this.makeSearch} />
-        {this.state.search.space ? <div>cards</div> : <Loader />}
-      </>
+        {this.state.search ? <div>cards</div> : <Loader />}
+      </div>
     );
   }
 }

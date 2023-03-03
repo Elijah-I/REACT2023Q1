@@ -1,6 +1,6 @@
 import { SearchState } from './search.types';
 
 export interface MainState {
-  search: SearchState;
+  search: SearchState | null;
   cards: [];
 }

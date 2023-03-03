@@ -3,14 +3,12 @@ import { Outlet } from 'react-router-dom';
 
 import Header from 'components/Header';
 
-import './index.scss';
-
-class Root extends React.Component {
+class Root extends React.PureComponent {
   render() {
     return (
       <>
         <Header />
-        <main className="container main">
+        <main className="container">
           <Outlet />
         </main>
       </>

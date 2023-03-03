@@ -1,10 +1,12 @@
 import React from 'react';
 import type { SearchLineProps } from 'types/search.types';
+import './index.scss';
 
-class SearchLine extends React.Component<SearchLineProps> {
+class SearchLine extends React.PureComponent<SearchLineProps> {
   render() {
     return (
-      <div>
+      <div className="search__line">
+        <div className={`icon icon--search icon--${this.props.option}`}></div>
         <input
           type="text"
           className="input search__input"

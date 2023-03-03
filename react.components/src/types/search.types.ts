@@ -1,11 +1,11 @@
 type SetCallback = (event: React.ChangeEvent<HTMLInputElement>) => void;
-type MakeCallback = (searchState: SearchState) => void;
+type MakeCallback = (searchState: SearchState | null) => void;
 
 export enum OPTION {
-  ALL,
-  PHOTO,
-  POST,
-  VIDEO,
+  ALL = 'all',
+  PHOTO = 'photo',
+  POST = 'post',
+  VIDEO = 'video',
 }
 
 export interface SearchState {
@@ -15,7 +15,7 @@ export interface SearchState {
 }
 
 export interface OptionsProps {
-  option: number;
+  option: OPTION;
   setOption: SetCallback;
 }
 
@@ -25,6 +25,7 @@ export interface SpacesProps {
 }
 
 export interface SearchLineProps {
+  option: OPTION;
   search: string;
   setSearch: SetCallback;
 }

@@ -3,11 +3,7 @@
 
 .header {
   width: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  padding: $gap 0;
-  background-color: $primary-color-fone;
+  padding-top: $gap;
 }
 
 .header__container {
@@ -17,6 +13,7 @@
   height: $header-h;
   display: flex;
   gap: $gap;
+  padding: 0 $gap;
   align-items: center;
   justify-content: flex-end;
 }

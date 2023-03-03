@@ -40,7 +40,88 @@ ul {
 }
 
 .input {
+  @extend %font-lower;
+
+  height: 5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  min-width: 1.6rem;
+  padding-left: 1.4rem;
+  padding-bottom: 0.3rem;
+  outline: none;
+  box-sizing: border-box;
 }
 
 .button {
+  @extend %box-inset;
+  @extend %font-upper;
+
+  height: 5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0 $gap;
+  box-sizing: border-box;
+  padding-bottom: 0.2rem;
+  color: $primary-color-font;
+  transition: color 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-color-active;
+  }
+}
+
+.radio {
+  input {
+    display: none;
+  }
+
+  label {
+    @extend %font-upper;
+
+    height: 2.6rem;
+    display: flex;
+    align-items: center;
+    color: $primary-color-font;
+    font-size: 1.2rem;
+    position: relative;
+    padding-left: 4rem;
+    transition: color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-color-active;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -0.2rem;
+      width: 2.6rem;
+      height: 2.6rem;
+      border: 2px solid $primary-color-font;
+      border-radius: 50%;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0.3rem;
+      top: 0.1rem;
+      width: 2.4rem;
+      height: 2.4rem;
+      background-color: $primary-color-font;
+      border-radius: 50%;
+      display: none;
+    }
+  }
+
+  input:checked + label {
+    color: $primary-color-active;
+
+    &::after {
+      display: block;
+    }
+  }
 }

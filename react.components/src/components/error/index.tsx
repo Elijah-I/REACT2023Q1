@@ -4,7 +4,7 @@ import ROUTES from 'types/routes.types';
 import imgSrc from '../../assets/img/404.jpg';
 import './index.scss';
 
-class Error extends React.Component {
+class Error extends React.PureComponent {
   render() {
     return (
       <div className="error__wrapper">

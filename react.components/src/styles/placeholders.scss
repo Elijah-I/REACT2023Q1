@@ -5,13 +5,13 @@
   border-radius: 5rem;
   background: $primary-color-fone;
   box-shadow: 2rem 2rem 6rem $primary-color-shadow, -2rem -2rem 6rem $secondary-color-shadow;
-  padding: 0 $gap;
   box-sizing: border-box;
 }
 
 %box-inset {
   @extend %box;
   background: linear-gradient(145deg, #c2bde5, #e6e1ff);
+  box-shadow: 1rem 1rem 3rem $primary-color-shadow, -1rem -1rem 3rem $secondary-color-shadow;
 }
 
 %font-lower {

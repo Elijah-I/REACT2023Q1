@@ -16,6 +16,6 @@
 .cards__list {
   display: grid;
   gap: $gap;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, calc(25% - $gap * 3 / 4)));
+  grid-template-columns: repeat(auto-fill, minmax(25rem, auto));
   padding: calc($gap * 2) 0;
 }

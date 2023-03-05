@@ -8,10 +8,20 @@
   box-sizing: border-box;
 }
 
-%box-inset {
+%box-small {
   @extend %box;
-  background: linear-gradient(145deg, #c2bde5, #e6e1ff);
   box-shadow: 1rem 1rem 3rem $primary-color-shadow, -1rem -1rem 3rem $secondary-color-shadow;
+}
+
+%box-inset {
+  @extend %box-small;
+  background: linear-gradient(145deg, #c2bde5, #e6e1ff);
+}
+
+%box-inset-small {
+  @extend %box-inset;
+  box-shadow: 0.5rem 0.5rem 1.5rem $primary-color-shadow,
+    -0.5rem -0.5rem -1.5rem $secondary-color-shadow;
 }
 
 %font-lower {
@@ -20,4 +30,11 @@
 
 %font-upper {
   font: 400 1.6rem LemonMilk, sans-serif;
+}
+
+%crop {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -48,7 +48,7 @@ class Main extends React.PureComponent {
         <Search makeSearch={this.makeSearch} />
 
         {this.state.search && this.state.cards ? (
-          <Cards cards={this.state.cards} />
+          <Cards cards={this.state.cards} search={this.state.search} />
         ) : (
           <div className="main__loader">
             <Loader />

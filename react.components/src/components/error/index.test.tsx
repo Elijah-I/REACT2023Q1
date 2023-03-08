@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 
-import withRouter, { host } from '../../tests/withRouter';
+import withRouter, { host } from 'tests/withRouter';
 import Error from '.';
 
 describe('About', () => {
@@ -17,7 +17,9 @@ describe('About', () => {
 
   it('has home page link', () => {
     const links = screen.getAllByRole('link');
-    const haveRequiredHref = links.some((link) => link.href === `${host}/#/`);
+    const haveRequiredHref = links.some(
+      (link) => (link as HTMLAnchorElement).href === `${host}/#/`
+    );
     expect(haveRequiredHref).toBeTruthy();
   });
 });

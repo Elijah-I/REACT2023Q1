@@ -18,6 +18,7 @@
     "resolveJsonModule": true,
     "paths": {
       "types/*": ["types/*"],
+      "tests/*": ["tests/*"],
       "pages/*": ["pages/*"],
       "components/*": ["components/*"]
     }

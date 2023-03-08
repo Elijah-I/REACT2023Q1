@@ -23,7 +23,7 @@ class Options extends React.PureComponent<OptionsProps> {
               <label
                 htmlFor={`option-${option}`}
                 className={`icon icon--${option} ${
-                  this.props.option === option ? 'icon--seletced' : ''
+                  this.props.option === option ? 'icon--selected' : ''
                 }`}
               ></label>
             </div>

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://rolling-scopes-school.github.io/elijah-i-REACT2023Q1/react.components",
+  "homepage": "https://elijah-i.github.io/REACT2023Q1/react.components/",
   "scripts": {
     "dev": "vite",
     "test": "vitest",
@@ -24,6 +24,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/sort-by": "^1.2.0",

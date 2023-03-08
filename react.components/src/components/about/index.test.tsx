@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 
-import withRouter from '../../tests/withRouter';
+import withRouter from 'tests/withRouter';
 import About from '.';
 
 describe('About', () => {
@@ -17,7 +17,7 @@ describe('About', () => {
   it('renders Social component', () => {
     const links = screen.getAllByRole('link');
     const haveRequiredHref = links.some((link) =>
-      link.href.toLowerCase().includes('Elijah-I'.toLowerCase())
+      (link as HTMLAnchorElement).href.toLowerCase().includes('Elijah-I'.toLowerCase())
     );
     expect(haveRequiredHref).toBeTruthy();
   });

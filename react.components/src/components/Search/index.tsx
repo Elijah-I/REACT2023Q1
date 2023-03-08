@@ -49,8 +49,11 @@ class Search extends React.PureComponent<SearchProps> {
   makeSearch(event?: React.SyntheticEvent) {
     if (event) event.preventDefault();
 
-    this.props.makeSearch(null);
-    setTimeout(() => this.props.makeSearch(this.state), 1000);
+    this.props.makeSearch(this.state);
+
+    setTimeout(() => {
+      //this.props.makeSearch(this.state);
+    }, 1000);
   }
 
   setOption(event: React.ChangeEvent<HTMLInputElement>) {
@@ -76,7 +79,7 @@ class Search extends React.PureComponent<SearchProps> {
 
   render() {
     return (
-      <Form onSubmit={this.makeSearch}>
+      <Form role="form" onSubmit={this.makeSearch}>
         <div className="search__wrapper">
           <SearchLine
             option={this.state.option}

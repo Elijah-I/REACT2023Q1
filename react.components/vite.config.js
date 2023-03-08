@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  base: '/elijah-i-REACT2023Q1/react.components',
+  base: '/REACT2023Q1/react.components',
   plugins: [react(), tsconfigPaths(), eslint()],
   test: {
     globals: true,
@@ -13,7 +13,13 @@ export default defineConfig({
     setupFiles: './src/tests/setup.js',
     coverage: {
       all: true,
-      exclude: [...configDefaults.exclude, 'src/types/**', '**/*.d.ts', 'src/tests/**'],
+      exclude: [
+        ...configDefaults.exclude,
+        'src/types/**',
+        '**/*.d.ts',
+        'src/tests/**',
+        '**/*.test.*',
+      ],
       reportsDirectory: './src/tests/coverage',
     },
   },

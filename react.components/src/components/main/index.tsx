@@ -24,8 +24,8 @@ class Main extends React.PureComponent {
     this.getCards = this.getCards.bind(this);
   }
 
-  componentDidMount() {
-    this.getCards();
+  async componentDidMount() {
+    await this.getCards();
   }
 
   makeSearch(searchState: SearchState | null) {

@@ -28,10 +28,10 @@ class Search extends React.PureComponent<SearchProps> {
     this.setSpace = this.setSpace.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const lsState = localStorage.getItem('search.state');
     if (lsState) this.setState({ ...JSON.parse(lsState) });
-    this.makeSearch();
+    await this.makeSearch();
   }
 
   componentDidUpdate() {
@@ -46,14 +46,19 @@ class Search extends React.PureComponent<SearchProps> {
     localStorage.setItem('search.state', JSON.stringify(this.state));
   }
 
-  makeSearch(event?: React.SyntheticEvent) {
+  async makeSearch(event?: React.SyntheticEvent) {
     if (event) event.preventDefault();
 
-    this.props.makeSearch(this.state);
+    this.props.makeSearch(null);
 
-    setTimeout(() => {
-      //this.props.makeSearch(this.state);
-    }, 1000);
+    await this.wait(1000);
+    this.props.makeSearch(this.state);
+  }
+
+  wait(milliseconds: number) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, milliseconds);
+    });
   }
 
   setOption(event: React.ChangeEvent<HTMLInputElement>) {
@@ -79,7 +84,7 @@ class Search extends React.PureComponent<SearchProps> {
 
   render() {
     return (
-      <Form role="form" onSubmit={this.makeSearch}>
+      <Form role="form" onSubmit={async () => await this.makeSearch()}>
         <div className="search__wrapper">
           <SearchLine
             option={this.state.option}

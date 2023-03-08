@@ -28,4 +28,8 @@ const router = createHashRouter(
   )
 );
 
-if (root) ReactDOM.createRoot(root).render(<RouterProvider router={router} />);
+const app = <RouterProvider router={router} />;
+
+if (root) ReactDOM.createRoot(root).render(app);
+
+export default () => app;

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { SpacesProps } from 'types/search.types';
+import { SPACE, SpacesProps } from 'types/search.types';
 import './index.scss';
 
 class Spaces extends React.PureComponent<SpacesProps> {
@@ -11,8 +11,8 @@ class Spaces extends React.PureComponent<SpacesProps> {
             type="radio"
             name="type"
             id="local-search"
-            value="local"
-            checked={this.props.space === 'local'}
+            value={SPACE.LOCAL}
+            checked={this.props.space === SPACE.LOCAL}
             onChange={this.props.setSpace}
           />
           <label htmlFor="local-search">Search here</label>
@@ -22,8 +22,8 @@ class Spaces extends React.PureComponent<SpacesProps> {
             type="radio"
             name="type"
             id="web-search"
-            value="web"
-            checked={this.props.space === 'web'}
+            value={SPACE.WEB}
+            checked={this.props.space === SPACE.WEB}
             onChange={this.props.setSpace}
           />
           <label htmlFor="web-search">Search the Web</label>

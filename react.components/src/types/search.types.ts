@@ -8,11 +8,14 @@ export enum OPTION {
   VIDEO = 'video',
 }
 
-export type Space = 'local' | 'web';
+export enum SPACE {
+  LOCAL = 'local',
+  WEB = 'web',
+}
 
 export interface SearchState {
   option: OPTION;
-  space: Space;
+  space: SPACE;
   search: string;
 }
 
@@ -22,7 +25,7 @@ export interface OptionsProps {
 }
 
 export interface SpacesProps {
-  space: Space;
+  space: SPACE;
   setSpace: SetCallback;
 }
 

@@ -61,7 +61,6 @@ describe('Main', () => {
     await waitFor(() => {});
 
     firstCard = await screen.findByText(/site better/);
-
     expect(firstCard).toBeInTheDocument();
   });
 });

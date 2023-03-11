@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 
 import { Card as ICard } from 'types/card.types';
-import { OPTION, SearchState } from 'types/search.types';
+import { OPTION, SearchState, SPACE } from 'types/search.types';
 import Cards from '.';
 
 describe('Card', () => {
@@ -34,13 +34,13 @@ describe('Card', () => {
 
   const searchState: SearchState = {
     option: OPTION.ALL,
-    space: 'local',
+    space: SPACE.LOCAL,
     search: '',
   };
 
   beforeAll(() => {
     searchState.search = '';
-    searchState.space = 'local';
+    searchState.space = SPACE.LOCAL;
     searchState.option = OPTION.ALL;
   });
 

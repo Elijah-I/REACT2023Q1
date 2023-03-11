@@ -1,5 +1,11 @@
 import { SearchState } from './search.types';
 
+export interface Statistic {
+  views: number;
+  likes: number;
+  isFavorite: boolean;
+}
+
 export interface CardsProps {
   search: SearchState;
   cards: Card[];
@@ -16,9 +22,5 @@ export interface Card {
   type: string;
   tags: string[];
   picture: string;
-  statistic: {
-    views: number;
-    likes: number;
-    isFavorite: boolean;
-  };
+  statistic: Statistic;
 }

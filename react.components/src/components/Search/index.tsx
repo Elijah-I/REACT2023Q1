@@ -5,7 +5,7 @@ import Spaces from './Spaces';
 import Options from './Options';
 import SearchLine from './SearchLine';
 
-import { OPTION, SearchProps, SearchState } from 'types/search.types';
+import { OPTION, SearchProps, SearchState, SPACE } from 'types/search.types';
 
 import './index.scss';
 
@@ -17,7 +17,7 @@ class Search extends React.PureComponent<SearchProps> {
 
     this.state = {
       option: OPTION.ALL,
-      space: 'local',
+      space: SPACE.LOCAL,
       search: '',
     };
 

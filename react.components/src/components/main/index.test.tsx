@@ -1,17 +1,17 @@
 import React from 'react';
+import { vi } from 'vitest';
 import { screen, render, waitFor } from '@testing-library/react';
 
 import withRouter from 'tests/withRouter';
 import Main from '.';
 
-class MockMain extends Main {
-  async getCards() {
-    this.setState({
-      ...this.state,
-      cards: [
+describe('Main', () => {
+  beforeAll(() => {
+    vi.spyOn(Main.prototype, 'readCards').mockImplementation(async () => {
+      return Promise.resolve([
         {
           id: 0,
-          title: 'Make your site better',
+          title: 'Make your site worse',
           author: 'Elijah',
           type: 'photo',
           tags: ['IT', 'SEO', 'Listing'],
@@ -32,12 +32,10 @@ class MockMain extends Main {
             isFavorite: false,
           },
         },
-      ],
+      ]);
     });
-  }
-}
+  });
 
-describe('Main', () => {
   it('renders Search component', () => {
     const { container } = render(withRouter(<Main />));
     const localSearch = container.querySelector('#local-search');
@@ -51,16 +49,16 @@ describe('Main', () => {
   });
 
   it('shows cards after they are uploaded', async () => {
-    render(withRouter(<MockMain />));
+    render(withRouter(<Main />));
 
-    let firstCard = screen.queryByText(/site better/);
+    let firstCard = screen.queryByText(/site worse/);
     expect(firstCard).toBe(null);
 
     await waitFor(() => {});
     await waitFor(() => {});
     await waitFor(() => {});
 
-    firstCard = await screen.findByText(/site better/);
+    firstCard = await screen.findByText(/site worse/);
     expect(firstCard).toBeInTheDocument();
   });
 });

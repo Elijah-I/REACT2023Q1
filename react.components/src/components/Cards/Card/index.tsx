@@ -1,5 +1,7 @@
 import React from 'react';
 import type { CardProps } from 'types/card.types';
+import viewsImgSrc from '../../../assets/icons/views.svg';
+import likesImgSrc from '../../../assets/icons/likes.svg';
 import './index.scss';
 
 class Card extends React.PureComponent<CardProps> {
@@ -25,11 +27,11 @@ class Card extends React.PureComponent<CardProps> {
         <div className="card__pannel">
           <div className="card__info">
             <div className="card__likes">
-              <b></b>
+              <img src={likesImgSrc} alt="like icon" />
               <i>{this.props.info.statistic.likes}</i>
             </div>
             <div className="card__views">
-              <b></b>
+              <img src={viewsImgSrc} alt="view icon" />
               <i>{this.props.info.statistic.views}</i>
             </div>
           </div>

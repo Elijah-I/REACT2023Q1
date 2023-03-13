@@ -113,7 +113,7 @@
   }
 
   // .card__info b
-  b {
+  img {
     display: block;
     width: 1.9rem;
     height: 1.9rem;
@@ -128,14 +128,6 @@
     gap: 0.5rem;
     align-items: center;
   }
-}
-
-.card__likes b {
-  background-image: url('../../../assets/icons/likes.svg');
-}
-
-.card__views b {
-  background-image: url('../../../assets/icons/views.svg');
 }
 
 .card__favorite {

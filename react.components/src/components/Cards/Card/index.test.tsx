@@ -20,7 +20,7 @@ describe('Card', () => {
   });
 
   it('renders card with image src and alt="preview"', () => {
-    const logo = screen.getByRole('img');
+    const logo = screen.getAllByRole('img')[0];
     expect(logo).toHaveAttribute('src', expect.stringMatching(/\/tt700.jpg/));
     expect(logo).toHaveAttribute('alt', 'preview');
   });

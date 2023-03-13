@@ -35,10 +35,14 @@ class Main extends React.PureComponent {
     });
   }
 
+  async readCards() {
+    return (await import('./../../model/cards.json')).default;
+  }
+
   async getCards() {
     this.setState({
       ...this.state,
-      cards: (await import('./../../model/cards.json')).default,
+      cards: await this.readCards(),
     });
   }
 

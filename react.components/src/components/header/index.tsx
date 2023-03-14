@@ -19,6 +19,7 @@ class Header extends React.PureComponent {
     this.links = [
       { name: 'main', href: ROUTES.ROOT },
       { name: 'about', href: ROUTES.ABOUT },
+      { name: '404', href: ROUTES.ERROR },
     ];
   }
 

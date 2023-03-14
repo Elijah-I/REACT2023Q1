@@ -2,7 +2,7 @@
 
 .error__wrapper {
   width: 100vw;
-  height: 100vh;
+  margin-top: $gap;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,9 +20,10 @@
   display: block;
   overflow: hidden;
 
+  // .error__block img
   img {
     width: 100%;
-    max-width: 100rem;
+    max-width: $max-w;
     display: block;
   }
 }

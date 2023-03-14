@@ -1,6 +1,6 @@
 import React from 'react';
 import { vi } from 'vitest';
-import { screen, render, waitFor } from '@testing-library/react';
+import { screen, render, waitFor, act } from '@testing-library/react';
 
 import withRouter from 'tests/withRouter';
 import Main from '.';
@@ -49,14 +49,12 @@ describe('Main', () => {
   });
 
   it('shows cards after they are uploaded', async () => {
-    render(withRouter(<Main />));
+    await act(async () => {
+      render(withRouter(<Main />));
+    });
 
     let firstCard = screen.queryByText(/site worse/);
     expect(firstCard).toBe(null);
-
-    await waitFor(() => {});
-    await waitFor(() => {});
-    await waitFor(() => {});
 
     firstCard = await screen.findByText(/site worse/);
     expect(firstCard).toBeInTheDocument();

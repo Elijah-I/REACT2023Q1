@@ -9,7 +9,6 @@ class About extends React.PureComponent {
   render() {
     return (
       <>
-        <h1 className="page__title">about page</h1>
         <Author />
         <Social />
       </>

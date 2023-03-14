@@ -10,6 +10,7 @@
   @extend %box;
   @extend %font-upper;
 
+  position: relative;
   height: $header-h;
   display: flex;
   gap: $gap;
@@ -32,4 +33,11 @@
   color: $primary-color-active;
   pointer-events: none;
   cursor: default;
+}
+
+.page__title {
+  @extend %font-upper;
+  color: $secondary-color-active;
+  position: absolute;
+  left: $gap;
 }

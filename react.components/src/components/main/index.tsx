@@ -49,7 +49,6 @@ class Main extends React.PureComponent {
   render() {
     return (
       <div className="main">
-        <h1 className="page__title">main page</h1>
         <Search makeSearch={this.makeSearch} />
 
         {this.state.search && this.state.cards ? (

@@ -54,7 +54,7 @@ class Header extends React.PureComponent {
   }
 
   getRouteTitle() {
-    let currentLink = this.links.filter((link) => link.href === this.state.currentRoute);
+    let currentLink = this.links.filter((link) => link.href === this.getCurrentRoute());
     if (!currentLink.length) currentLink = [this.links[2]];
 
     return currentLink[0].title;

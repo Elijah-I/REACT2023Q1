@@ -56,7 +56,9 @@ describe('Main', () => {
     let firstCard = screen.queryByText(/site worse/);
     expect(firstCard).toBe(null);
 
-    firstCard = await screen.findByText(/site worse/);
-    expect(firstCard).toBeInTheDocument();
+    waitFor(async () => {
+      firstCard = await screen.findByText(/site worse/);
+      expect(firstCard).toBeInTheDocument();
+    });
   });
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import withRouter from 'tests/withRouter';
 import Root from '.';

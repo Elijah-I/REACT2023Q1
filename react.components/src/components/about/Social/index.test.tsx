@@ -1,12 +1,12 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
-import withRouter from 'tests/withRouter';
+import renderWithRouter from 'tests/renderWithRouter';
 import Social from '.';
 
 describe('Social', () => {
   beforeEach(() => {
-    render(withRouter(<Social />));
+    renderWithRouter(<Social />);
   });
 
   it('has author github link', () => {

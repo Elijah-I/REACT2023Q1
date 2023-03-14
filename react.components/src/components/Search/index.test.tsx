@@ -1,27 +1,27 @@
 import React from 'react';
 import { vi } from 'vitest';
-import { screen, render, fireEvent, createEvent } from '@testing-library/react';
+import { screen, fireEvent, createEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { OPTION } from 'types/search.types';
-import withRouter from 'tests/withRouter';
+import renderWithRouter from 'tests/renderWithRouter';
 import Search from '.';
 
 describe('Search', () => {
   it('renders Options component', () => {
-    const { container } = render(withRouter(<Search makeSearch={vi.fn()} />));
+    const { container } = renderWithRouter(<Search makeSearch={vi.fn()} />);
     const optionAll = container.querySelector(`#option-${OPTION.ALL}`);
     expect(optionAll).toBeInTheDocument();
   });
 
   it('renders SearchLine component', () => {
-    render(withRouter(<Search makeSearch={vi.fn()} />));
+    renderWithRouter(<Search makeSearch={vi.fn()} />);
     const SearchLine = screen.getByRole('textbox');
     expect(SearchLine).toBeInTheDocument();
   });
 
   it('renders Spaces component', () => {
-    const { container } = render(withRouter(<Search makeSearch={vi.fn()} />));
+    const { container } = renderWithRouter(<Search makeSearch={vi.fn()} />);
     const localSearch = container.querySelector('#local-search');
     expect(localSearch).toBeInTheDocument();
   });
@@ -29,7 +29,7 @@ describe('Search', () => {
   it('switches Option component on click', () => {
     const makeSearch = vi.fn();
 
-    const { container } = render(withRouter(<Search makeSearch={makeSearch} />));
+    const { container } = renderWithRouter(<Search makeSearch={makeSearch} />);
     const allLabel = container.querySelector(`.icon--${OPTION.ALL}`)!;
     const photoLabel = container.querySelector(`.icon--${OPTION.PHOTO}`)!;
 
@@ -43,7 +43,7 @@ describe('Search', () => {
   it('switches Spaces component on click', () => {
     const makeSearch = vi.fn();
 
-    const { container } = render(withRouter(<Search makeSearch={makeSearch} />));
+    const { container } = renderWithRouter(<Search makeSearch={makeSearch} />);
     const webLabel = screen.getByLabelText(/the web/i);
     const localRadio = container.querySelector('#local-search')! as HTMLInputElement;
     const webRadio = container.querySelector('#web-search')! as HTMLInputElement;
@@ -59,7 +59,7 @@ describe('Search', () => {
     const makeSearch = vi.fn();
     const expectedValue = 'test';
 
-    const { container } = render(withRouter(<Search makeSearch={makeSearch} />));
+    const { container } = renderWithRouter(<Search makeSearch={makeSearch} />);
     const search = container.querySelector('.search__input')! as HTMLInputElement;
 
     const user = userEvent.setup();
@@ -70,7 +70,7 @@ describe('Search', () => {
   });
 
   it('should prevent default action on submit', () => {
-    render(withRouter(<Search makeSearch={vi.fn()} />));
+    renderWithRouter(<Search makeSearch={vi.fn()} />);
 
     const form = screen.getByRole('form');
     const submitEvent = createEvent.submit(form);

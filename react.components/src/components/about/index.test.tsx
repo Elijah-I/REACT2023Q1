@@ -1,12 +1,12 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
-import withRouter from 'tests/withRouter';
+import renderWithRouter from 'tests/renderWithRouter';
 import About from '.';
 
 describe('About', () => {
   beforeEach(() => {
-    render(withRouter(<About />));
+    renderWithRouter(<About />);
   });
 
   it('renders Author component', () => {

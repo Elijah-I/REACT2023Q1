@@ -1,8 +1,8 @@
 import React from 'react';
 import { vi } from 'vitest';
-import { screen, render, waitFor, act } from '@testing-library/react';
+import { screen, waitFor, act } from '@testing-library/react';
 
-import withRouter from 'tests/withRouter';
+import renderWithRouter from 'tests/renderWithRouter';
 import Main from '.';
 
 describe('Main', () => {
@@ -37,20 +37,20 @@ describe('Main', () => {
   });
 
   it('renders Search component', () => {
-    const { container } = render(withRouter(<Main />));
+    const { container } = renderWithRouter(<Main />);
     const localSearch = container.querySelector('#local-search');
     expect(localSearch).toBeInTheDocument();
   });
 
   it('shows loader while cards are uploading', () => {
-    const { container } = render(withRouter(<Main />));
+    const { container } = renderWithRouter(<Main />);
     const loader = container.querySelector('.loader');
     expect(loader).toBeInTheDocument();
   });
 
   it('shows cards after they are uploaded', async () => {
     await act(async () => {
-      render(withRouter(<Main />));
+      renderWithRouter(<Main />);
     });
 
     let firstCard = screen.queryByText(/site worse/);

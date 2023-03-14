@@ -1,18 +1,16 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-
-import withRouter from 'tests/withRouter';
+import renderWithRouter from 'tests/renderWithRouter';
 import Root from '.';
 
 describe('Root', () => {
   it('renders Header component', () => {
-    const { container } = render(withRouter(<Root />));
+    const { container } = renderWithRouter(<Root />);
     const header = container.getElementsByClassName('header');
     expect(header.length).toBe(1);
   });
 
   it('renders Container divs', () => {
-    const { container } = render(withRouter(<Root />));
+    const { container } = renderWithRouter(<Root />);
     const containers = container.getElementsByClassName('container');
     expect(containers.length).toBe(2);
   });

@@ -10,13 +10,15 @@ class Error extends React.PureComponent {
     return (
       <>
         <Header />
-        <div className="error__wrapper">
-          <div className="container error__container">
+        <main className="container error__wrapper">
+          <h1 className="page__title">404 page</h1>
+
+          <div className="error__container">
             <NavLink to={ROUTES.ROOT} className="error__block">
               <img src={img404Src} alt="not found" />
             </NavLink>
           </div>
-        </div>
+        </main>
       </>
     );
   }

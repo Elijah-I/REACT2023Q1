@@ -1,11 +1,7 @@
 @import '@/styles/placeholders';
 
 .error__wrapper {
-  width: 100vw;
-  margin-top: $gap;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: calc($gap * 2) !important;
 }
 
 .error__container {

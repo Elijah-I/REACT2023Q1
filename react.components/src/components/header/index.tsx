@@ -1,7 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Location, NavLink } from 'react-router-dom';
 
 import ROUTES from 'types/routes.types';
+import { withRouter } from './withRouter';
 
 import './index.scss';
 
@@ -11,15 +12,14 @@ interface HeaderLink {
   href: ROUTES;
 }
 
-interface HeaderState {
-  currentRoute: string;
+interface HeaderProps {
+  location: Location;
 }
 
-class Header extends React.PureComponent {
-  state: HeaderState;
+class Header extends React.PureComponent<HeaderProps> {
   links: HeaderLink[];
 
-  constructor(props: object) {
+  constructor(props: HeaderProps) {
     super(props);
 
     this.links = [
@@ -27,30 +27,12 @@ class Header extends React.PureComponent {
       { name: 'about', title: 'about page', href: ROUTES.ABOUT },
       { name: '404', title: '404 page', href: ROUTES.ERROR },
     ];
-
-    this.state = {
-      currentRoute: this.getCurrentRoute(),
-    };
   }
 
   getCurrentRoute() {
-    let route = location.hash.replace(/\#\/([a-z])/i, '$1').replace('#', '');
+    let route = this.props.location.pathname.replace('/', '');
     if (!route) route = '/';
     return route;
-  }
-
-  componentDidMount() {
-    window.addEventListener('popstate', () => {
-      const route = this.getCurrentRoute();
-      this.changeCurrentRoute(route);
-    });
-  }
-
-  changeCurrentRoute(route: string) {
-    this.setState({
-      ...this.state,
-      currentRoute: route,
-    });
   }
 
   getRouteTitle() {
@@ -73,7 +55,6 @@ class Header extends React.PureComponent {
                   className={(status) =>
                     'header__link' + (status.isActive ? ' header__link--active' : '')
                   }
-                  onClick={() => this.changeCurrentRoute(link.href)}
                 >
                   {link.name}
                 </NavLink>
@@ -86,4 +67,4 @@ class Header extends React.PureComponent {
   }
 }
 
-export default Header;
+export default withRouter(Header);

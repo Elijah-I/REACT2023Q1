@@ -21,7 +21,7 @@ class App extends React.Component {
     const router = createHashRouter(
       createRoutesFromElements(
         <Route path={ROUTES.ROOT} element={<Root />}>
-          <Route path={ROUTES.ROOT} element={<Main />} />
+          <Route index element={<Main />} />
           <Route path={ROUTES.ABOUT} element={<About />} />
           <Route path="/*" element={<Error />} />
         </Route>

@@ -16,19 +16,23 @@ import ROUTES from 'types/routes.types';
 
 import './styles/app.scss';
 
+class App extends React.Component {
+  render() {
+    const router = createHashRouter(
+      createRoutesFromElements(
+        <Route path={ROUTES.ROOT} element={<Root />}>
+          <Route path={ROUTES.ROOT} element={<Main />} />
+          <Route path={ROUTES.ABOUT} element={<About />} />
+          <Route path="/*" element={<Error />} />
+        </Route>
+      )
+    );
+
+    return <RouterProvider router={router} />;
+  }
+}
+
 const root = document.getElementById('root');
-const router = createHashRouter(
-  createRoutesFromElements(
-    <Route path={ROUTES.ROOT} element={<Root />}>
-      <Route path={ROUTES.ROOT} element={<Main />} />
-      <Route path={ROUTES.ABOUT} element={<About />} />
-      <Route path="/*" element={<Error />} />
-    </Route>
-  )
-);
+if (root) ReactDOM.createRoot(root).render(<App />);
 
-const app = <RouterProvider router={router} />;
-
-if (root) ReactDOM.createRoot(root).render(app);
-
-export default () => app;
+export default App;

@@ -1,10 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-export function withRouter<ComponentProps>(Component: React.ComponentClass<ComponentProps>) {
-  function ComponentWithRouterProp(props: ComponentProps) {
-    return <Component {...props} location={useLocation()} />;
-  }
+export interface WithRouterProps {
+  location: ReturnType<typeof useLocation>;
+}
 
-  return ComponentWithRouterProp;
+export function withRouter<ComponentProps>(Component: React.ComponentClass<ComponentProps>) {
+  return (props: Omit<ComponentProps, keyof WithRouterProps>) => {
+    return <Component {...(props as ComponentProps)} location={useLocation()} />;
+  };
 }

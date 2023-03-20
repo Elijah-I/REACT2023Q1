@@ -4,11 +4,9 @@ import renderWithRouter, { host } from 'tests/renderWithRouter';
 
 import Header from '.';
 
-const mockLocation = { state: '', key: '', pathname: '', search: '', hash: '' };
-
 describe('About', () => {
   it('has main page link', () => {
-    renderWithRouter(<Header location={mockLocation} />);
+    renderWithRouter(<Header />);
 
     const links = screen.getAllByRole('link');
     const haveRequiredHref = links.some((link) => (link as HTMLAnchorElement).href === `${host}/`);
@@ -17,7 +15,7 @@ describe('About', () => {
   });
 
   it('has main page link selected', () => {
-    renderWithRouter(<Header location={mockLocation} />);
+    renderWithRouter(<Header />);
 
     const selectedLink = screen.getByRole('link', { current: 'page' });
 
@@ -25,7 +23,7 @@ describe('About', () => {
   });
 
   it('has about link', () => {
-    renderWithRouter(<Header location={mockLocation} />);
+    renderWithRouter(<Header />);
 
     const links = screen.getAllByRole('link');
     const haveRequiredHref = links.some(
@@ -36,7 +34,7 @@ describe('About', () => {
   });
 
   it('handles incorrect URL', async () => {
-    renderWithRouter(<Header location={mockLocation} />, '/fake');
+    renderWithRouter(<Header />, '/fake');
 
     const title404 = screen.getByText(/404 page/i);
     expect(title404).toBeInTheDocument();

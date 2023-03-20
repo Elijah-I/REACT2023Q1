@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import renderWithRouter, { host } from 'tests/renderWithRouter';
 
 import Header from '.';

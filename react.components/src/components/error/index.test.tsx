@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 
-import renderWithRouter, { host } from 'tests/renderWithRouter';
+import renderWithRouter from 'tests/renderWithRouter';
 import Error from '.';
 
 describe('About', () => {

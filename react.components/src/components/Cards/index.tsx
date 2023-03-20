@@ -14,6 +14,8 @@ class Cards extends React.PureComponent<CardsProps> {
     let pass = true;
     const filter = this.props.search;
 
+    if (!filter) return pass;
+
     const containedIn = (str: string) => {
       return str.toLowerCase().includes(filter.search.toLowerCase());
     };

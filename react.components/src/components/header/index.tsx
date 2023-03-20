@@ -25,6 +25,7 @@ class Header extends React.PureComponent<HeaderProps> {
     this.links = [
       { name: 'main', title: 'main page', href: ROUTES.ROOT },
       { name: 'about', title: 'about page', href: ROUTES.ABOUT },
+      { name: 'create', title: 'create page', href: ROUTES.CREATE },
       { name: '404', title: '404 page', href: ROUTES.ERROR },
     ];
   }
@@ -37,7 +38,7 @@ class Header extends React.PureComponent<HeaderProps> {
 
   getRouteTitle() {
     let currentLink = this.links.filter((link) => link.href === this.getCurrentRoute());
-    if (!currentLink.length) currentLink = [this.links[2]];
+    if (!currentLink.length) currentLink = [this.links[this.links.length - 1]];
 
     return currentLink[0].title;
   }

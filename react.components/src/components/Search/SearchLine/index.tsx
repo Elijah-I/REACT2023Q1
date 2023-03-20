@@ -9,7 +9,7 @@ class SearchLine extends React.PureComponent<SearchLineProps> {
         <div className={`icon icon--search icon--${this.props.option}`}></div>
         <input
           type="text"
-          className="input search__input"
+          className="white-box search__input"
           value={this.props.search}
           onChange={this.props.setSearch}
         />

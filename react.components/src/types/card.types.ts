@@ -1,4 +1,4 @@
-import { SearchState } from './search.types';
+import { OPTION, SearchState } from './search.types';
 
 export interface Statistic {
   views: number;
@@ -7,7 +7,7 @@ export interface Statistic {
 }
 
 export interface CardsProps {
-  search: SearchState;
+  search?: SearchState;
   cards: Card[];
 }
 
@@ -19,7 +19,7 @@ export interface Card {
   id: number;
   title: string;
   author: string;
-  type: string;
+  type: OPTION;
   tags: string[];
   picture: string;
   statistic: Statistic;

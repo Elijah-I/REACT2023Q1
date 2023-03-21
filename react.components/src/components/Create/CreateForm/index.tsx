@@ -143,6 +143,7 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
     if (!card.title) errors.title = 'field is required';
     if (card.tags.length === 0) errors.tags = 'field is required';
     if (!card.picture) errors.file = 'upload an image';
+
     if (file && !file.type.startsWith('image/')) errors.file = 'uploaded file is not an image';
     if (!this.elements.agreement.current?.checked) errors.agreement = 'accept agreement';
 

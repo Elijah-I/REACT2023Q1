@@ -7,6 +7,7 @@ interface InputCheckboxProps {
   labelText: string;
   error?: string;
   onClick: () => void;
+  forwardedRef: React.RefObject<HTMLInputElement>;
 }
 
 class InputCheckbox extends React.PureComponent<InputCheckboxProps> {
@@ -19,7 +20,7 @@ class InputCheckbox extends React.PureComponent<InputCheckboxProps> {
       <div className="input__element white-box">
         <div className="checkbox">
           <div className={titleClassName.join(' ')}>{this.props.error || this.props.title}</div>
-          <input type="checkbox" id={uniqID} />
+          <input type="checkbox" id={uniqID} ref={this.props.forwardedRef} />
           <label htmlFor={uniqID} onClick={this.props.onClick}>
             I take a full responsibility for the content I post
           </label>

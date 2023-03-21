@@ -62,10 +62,22 @@
   padding-bottom: calc($gap / 4);
   margin-top: calc($gap / 1.2);
   margin-bottom: calc($gap / 4);
+  display: flex;
+  gap: 0.3rem;
 
   // .card__author b
   b {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     color: $primary-color-active;
+
+    // .card__author b i
+    i {
+      font-style: normal;
+      font-size: 1.1rem;
+    }
   }
 }
 

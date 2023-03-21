@@ -15,7 +15,11 @@ class Card extends React.PureComponent<CardProps> {
         <div className="card__content">
           <div className="card__title">{this.props.info.title}</div>
           <div className="card__author">
-            by: <b>{this.props.info.author}</b>
+            by:
+            <b>
+              {this.props.info.author}
+              <i>[{this.props.info.date}]</i>
+            </b>
           </div>
           <div className="card__tags">
             {this.props.info.tags.map((tag, key) => (

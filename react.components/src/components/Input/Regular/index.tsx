@@ -5,6 +5,7 @@ interface InputRegularProps {
   title: string;
   type: 'text' | 'date';
   error?: string;
+  forwardedRef: React.RefObject<HTMLInputElement>;
   onFocus: () => void;
 }
 
@@ -20,6 +21,7 @@ class InputRegular extends React.PureComponent<InputRegularProps> {
       <div className="input__element">
         <div className={titleClassName.join(' ')}>{this.props.error || this.props.title}</div>
         <input
+          ref={this.props.forwardedRef}
           type={this.props.type}
           className={inputClassName.join(' ')}
           onFocus={this.props.onFocus}

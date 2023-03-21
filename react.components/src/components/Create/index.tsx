@@ -24,14 +24,14 @@ class Create extends React.PureComponent {
   onCreate(card: Card) {
     this.setState({
       ...this.state,
-      cards: [this.state.cards, card],
+      cards: [...this.state.cards, card],
     });
   }
 
   render() {
     return (
       <div className="create">
-        <CreateForm onCreate={this.onCreate} />
+        <CreateForm onCreate={this.onCreate} index={this.state.cards.length} />
         <Cards cards={this.state.cards} />
       </div>
     );

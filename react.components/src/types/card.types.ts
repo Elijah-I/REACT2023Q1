@@ -23,4 +23,5 @@ export interface Card {
   tags: string[];
   picture: string;
   statistic: Statistic;
+  date: string;
 }

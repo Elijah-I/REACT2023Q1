@@ -2,9 +2,14 @@ import React from 'react';
 import { v4 as uniqid } from 'uuid';
 import './index.scss';
 
+type Element = {
+  label: string;
+  forwardedRef: React.RefObject<HTMLInputElement>;
+};
+
 interface InputRadioGroupProps {
   title: string;
-  labelText: string[];
+  elements: Element[];
 }
 
 class InputRadioGroup extends React.PureComponent<InputRadioGroupProps> {
@@ -14,13 +19,20 @@ class InputRadioGroup extends React.PureComponent<InputRadioGroupProps> {
     return (
       <div className="input__element input__element--horisontal white-box">
         <div className="input__label">{this.props.title}</div>
-        {this.props.labelText.map((label, key) => {
+        {this.props.elements.map((element, key) => {
           const uniqId = uniqid();
 
           return (
             <div className="radio" key={uniqId}>
-              <input type="radio" name={groupUniqId} id={uniqId} defaultChecked={key === 0} />
-              <label htmlFor={uniqId}>{label}</label>
+              <input
+                type="radio"
+                name={groupUniqId}
+                id={uniqId}
+                defaultChecked={element.forwardedRef.current?.checked || key === 0}
+                ref={element.forwardedRef}
+                data-value={element.label}
+              />
+              <label htmlFor={uniqId}>{element.label}</label>
             </div>
           );
         })}

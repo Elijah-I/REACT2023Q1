@@ -12,6 +12,10 @@ input[type='file'] {
   cursor: pointer;
 }
 
+.image-label {
+  color: $primary-color-shadow;
+}
+
 .input__file {
   @extend %font-upper;
 
@@ -29,6 +33,10 @@ input[type='file'] {
   // .input__file--error
   &--error {
     border: 1px dashed $primary-color-error;
+  }
+
+  // .input__file--error .no-image
+  &--error .image-label {
     color: $primary-color-error;
   }
 }

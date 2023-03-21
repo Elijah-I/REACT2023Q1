@@ -1,0 +1,40 @@
+@import '@/styles/fonts';
+@import '@/styles/variables';
+
+%box {
+  border-radius: 5rem;
+  background: $primary-color-fone;
+  box-shadow: 2rem 2rem 6rem $primary-color-shadow, -2rem -2rem 6rem $secondary-color-shadow;
+  box-sizing: border-box;
+}
+
+%box-small {
+  @extend %box;
+  box-shadow: 1rem 1rem 3rem $primary-color-shadow, -1rem -1rem 3rem $secondary-color-shadow;
+}
+
+%box-inset {
+  @extend %box-small;
+  background: linear-gradient(145deg, #c2bde5, #e6e1ff);
+}
+
+%box-inset-small {
+  @extend %box-inset;
+  box-shadow: 0.5rem 0.5rem 1.5rem $primary-color-shadow,
+    -0.5rem -0.5rem -1.5rem $secondary-color-shadow;
+}
+
+%font-lower {
+  font: 400 1.6rem Roboto, sans-serif;
+}
+
+%font-upper {
+  font: 400 1.6rem LemonMilk, sans-serif;
+}
+
+%crop {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

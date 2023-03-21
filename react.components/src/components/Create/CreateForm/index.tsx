@@ -87,7 +87,7 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
     setTimeout(() => {
       this.resetForm();
       this.props.onCreate(card);
-    }, 1);
+    }, 1000);
   }
 
   resetForm() {

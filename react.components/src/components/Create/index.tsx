@@ -1,11 +1,16 @@
 import React from 'react';
-import Cards from 'components/Cards';
+
 import CreateForm from './CreateForm';
+import Cards from 'components/Cards';
+import Popup from './Popup';
+
 import { Card } from 'types/card.types';
+
 import './index.scss';
 
 interface CreateState {
   cards: Card[];
+  showPopup: boolean;
 }
 
 class Create extends React.PureComponent {
@@ -16,14 +21,27 @@ class Create extends React.PureComponent {
 
     this.state = {
       cards: [],
+      showPopup: false,
     };
 
     this.onCreate = this.onCreate.bind(this);
   }
 
+  componentDidUpdate() {
+    if (this.state.showPopup) {
+      setTimeout(() => {
+        this.setState({
+          ...this.state,
+          showPopup: false,
+        });
+      }, 3000);
+    }
+  }
+
   onCreate(card: Card) {
     this.setState({
       ...this.state,
+      showPopup: true,
       cards: [...this.state.cards, card],
     });
   }
@@ -33,6 +51,7 @@ class Create extends React.PureComponent {
       <div className="create">
         <CreateForm onCreate={this.onCreate} index={this.state.cards.length} />
         <Cards cards={this.state.cards} />
+        <Popup show={this.state.showPopup} />
       </div>
     );
   }

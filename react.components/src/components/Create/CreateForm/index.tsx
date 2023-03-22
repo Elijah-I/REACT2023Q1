@@ -80,7 +80,6 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
     if (!card) return;
 
     this.setState({
-      ...this.state,
       isSubmitting: true,
     });
 
@@ -95,7 +94,6 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
     if (this.elements.author[0].current) this.elements.author[0].current.checked = true;
 
     this.setState({
-      ...this.state,
       fileKey: uniqid(),
       isSubmitting: false,
     });
@@ -149,7 +147,6 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
 
     if (Object.keys(errors).length) {
       this.setState({
-        ...this.state,
         errors,
       });
 
@@ -164,7 +161,6 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
     delete errors[filed];
 
     this.setState({
-      ...this.state,
       errors,
     });
   }

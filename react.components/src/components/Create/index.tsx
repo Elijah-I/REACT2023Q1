@@ -31,7 +31,6 @@ class Create extends React.PureComponent {
     if (this.state.showPopup) {
       setTimeout(() => {
         this.setState({
-          ...this.state,
           showPopup: false,
         });
       }, 3000);
@@ -40,7 +39,6 @@ class Create extends React.PureComponent {
 
   onCreate(card: Card) {
     this.setState({
-      ...this.state,
       showPopup: true,
       cards: [...this.state.cards, card],
     });

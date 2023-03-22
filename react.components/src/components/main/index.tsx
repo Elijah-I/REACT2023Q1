@@ -30,7 +30,6 @@ class Main extends React.PureComponent {
 
   makeSearch(searchState: SearchState | null) {
     this.setState({
-      ...this.state,
       search: searchState || null,
     });
   }
@@ -41,7 +40,6 @@ class Main extends React.PureComponent {
 
   async getCards() {
     this.setState({
-      ...this.state,
       cards: await this.readCards(),
     });
   }

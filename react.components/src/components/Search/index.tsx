@@ -63,21 +63,18 @@ class Search extends React.PureComponent<SearchProps> {
 
   setOption(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      ...this.state,
       option: event.currentTarget.value,
     });
   }
 
   setSpace(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      ...this.state,
       space: event.currentTarget.value,
     });
   }
 
   setSearch(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      ...this.state,
       search: event.currentTarget.value,
     });
   }

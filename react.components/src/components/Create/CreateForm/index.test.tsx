@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import CreateForm from '.';
 
@@ -98,7 +98,7 @@ describe('CreateForm', () => {
   });
 
   it('handles corect submit', async () => {
-    const cbMock = vi.fn((card) => {});
+    const cbMock = vi.fn(() => {});
     const { container } = render(<CreateForm index={1} onCreate={cbMock} />);
 
     await waitFor(() => {

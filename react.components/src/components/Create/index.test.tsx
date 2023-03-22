@@ -1,6 +1,7 @@
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Create from '.';
+import { OPTION } from 'types/search.types';
 
 describe('Create', () => {
   const mockFilePng = new File(['test'], 'test.png', { type: 'image/png' });
@@ -25,6 +26,8 @@ describe('Create', () => {
     await waitFor(() => {
       fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 'mock card title' } });
       fireEvent.change(screen.getAllByRole('textbox')[1], { target: { value: 'mock' } });
+      fireEvent.change(container.querySelector('select')!, { target: { value: OPTION.PHOTO } });
+      fireEvent.click(container.querySelector('[type="radio"]')!);
       fireEvent.change(container.querySelector('[type="date"]')!, {
         target: { value: '2020-05-12' },
       });
@@ -51,6 +54,8 @@ describe('Create', () => {
     await waitFor(() => {
       fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 'mock card title' } });
       fireEvent.change(screen.getAllByRole('textbox')[1], { target: { value: 'mock' } });
+      fireEvent.change(container.querySelector('select')!, { target: { value: OPTION.PHOTO } });
+      fireEvent.click(container.querySelector('[type="radio"]')!);
       fireEvent.change(container.querySelector('[type="date"]')!, {
         target: { value: '2020-05-12' },
       });

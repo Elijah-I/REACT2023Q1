@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import CreateForm from '.';
+import { OPTION } from 'types/search.types';
 
 describe('CreateForm', () => {
   const mockFn = vi.fn;
@@ -104,6 +105,8 @@ describe('CreateForm', () => {
     await waitFor(() => {
       fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 'mock' } });
       fireEvent.change(screen.getAllByRole('textbox')[1], { target: { value: 'mock' } });
+      fireEvent.change(container.querySelector('select')!, { target: { value: OPTION.PHOTO } });
+      fireEvent.click(container.querySelector('[type="radio"]')!);
       fireEvent.change(container.querySelector('[type="date"]')!, {
         target: { value: '2020-05-12' },
       });

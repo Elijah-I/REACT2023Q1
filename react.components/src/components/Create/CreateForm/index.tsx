@@ -24,6 +24,8 @@ interface CreateFormState {
     tags?: string;
     date?: string;
     file?: string;
+    type?: string;
+    author?: string;
     agreement?: string;
   };
   isSubmitting: boolean;
@@ -126,9 +128,7 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
       picture,
       tags: [...(tags ? tags.split(', ') : [])],
       title: this.elements.title.current?.value || '',
-      type:
-        Object.values(OPTION).find((opt) => opt === this.elements.type.current?.value) ||
-        OPTION.PHOTO,
+      type: Object.values(OPTION).find((opt) => opt === this.elements.type.current?.value),
       statistic: {
         isFavorite: false,
         likes: 0,
@@ -138,7 +138,9 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
     };
 
     if (!card.date) errors.date = 'field is required';
+    if (!card.type) errors.type = 'pick content type';
     if (!card.title) errors.title = 'field is required';
+    if (!card.author) errors.author = 'pick an author';
     if (card.tags.length === 0) errors.tags = 'field is required';
     if (!card.picture) errors.file = 'upload an image';
 
@@ -190,7 +192,13 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
           forwardedRef={this.elements.date}
         />
 
-        <Select forwardedRef={this.elements.type}>
+        <Select
+          forwardedRef={this.elements.type}
+          title="media type"
+          onFocus={() => this.dropError('type')}
+          error={this.state.errors?.type}
+        >
+          <option></option>
           {Object.keys(OPTION).map((optKey) => {
             const option = OPTION[optKey as keyof typeof OPTION];
             if (option === 'all') return null;
@@ -210,6 +218,8 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
         />
         <InputRadioGroup
           title="author"
+          error={this.state.errors?.author}
+          onFocus={() => this.dropError('author')}
           elements={[
             { label: 'Elijah', forwardedRef: this.elements.author[0] },
             { label: 'Neo', forwardedRef: this.elements.author[1] },

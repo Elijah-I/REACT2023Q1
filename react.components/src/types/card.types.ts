@@ -19,7 +19,7 @@ export interface Card {
   id: number;
   title: string;
   author: string;
-  type: OPTION;
+  type: OPTION | undefined;
   tags: string[];
   picture: string;
   statistic: Statistic;

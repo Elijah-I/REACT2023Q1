@@ -75,10 +75,10 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
     this.dropError = this.dropError.bind(this);
   }
 
-  async handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const card = await this.validatedCard();
+    const card = this.validatedCard();
     if (!card) return;
 
     this.setState({
@@ -101,23 +101,12 @@ class CreateForm extends React.PureComponent<CreateFormProps> {
     });
   }
 
-  async readImage(file: Blob | null): Promise<string> {
-    return new Promise((resolve) => {
-      if (!file) return resolve('');
-      const reader = new FileReader();
-      reader.addEventListener('load', (event) => {
-        resolve(event?.target?.result?.toString() || '');
-      });
-      reader.readAsDataURL(file);
-    });
-  }
-
-  async validatedCard() {
+  validatedCard() {
     const errors = {} as typeof this.state.errors;
     const tags = this.elements.tags.current?.value;
     const files = this.elements.file.current?.files;
     const file = files ? files[0] : null;
-    const picture = await this.readImage(file);
+    const picture = file ? URL.createObjectURL(file) : '';
 
     const card: Card = {
       author: this.elements.author.reduce((acc, element) => {

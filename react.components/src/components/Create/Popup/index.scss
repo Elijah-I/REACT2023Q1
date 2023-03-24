@@ -1,0 +1,30 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+
+.popup__content {
+  @extend %box-bright;
+  @extend %font-upper;
+
+  color: $secondary-color-shadow;
+  padding: $gap;
+}
+
+.popup-exit,
+.popup-exit-done,
+.popup-exit-active,
+.popup-enter,
+.popup-enter-done,
+.popup-enter-active {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: top 0.3s ease, opacity 0.3s ease;
+}
+.popup-enter-done,
+.popup-enter-active {
+  opacity: 1;
+  top: 50px;
+  transition: top 0.3s ease, opacity 0.3s ease;
+}

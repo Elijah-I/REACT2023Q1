@@ -1,0 +1,26 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+
+.about__social {
+  @extend %box;
+
+  margin-top: calc($gap * 2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $gap;
+}
+
+.about__gh,
+.about__rs {
+  height: 4rem;
+
+  img {
+    height: 100%;
+    display: block;
+  }
+}
+
+.about__rs {
+  height: 3rem;
+}

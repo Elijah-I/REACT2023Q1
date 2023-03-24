@@ -1,0 +1,16 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+
+.input__element {
+  // .input__element--right-bottom
+  &--right-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  // .input__element .button
+  .button {
+    min-width: 12.2rem;
+  }
+}

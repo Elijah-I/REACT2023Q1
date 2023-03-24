@@ -1,4 +1,5 @@
 import React from 'react';
+import 'jsdom-worker';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import CreateForm from '.';

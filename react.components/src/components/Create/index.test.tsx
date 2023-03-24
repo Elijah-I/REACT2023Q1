@@ -1,4 +1,5 @@
 import React from 'react';
+import 'jsdom-worker';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Create from '.';
 import { OPTION } from 'types/search.types';

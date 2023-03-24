@@ -1,4 +1,5 @@
 import React from 'react';
+import 'jsdom-worker';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
 import InputFile from '.';

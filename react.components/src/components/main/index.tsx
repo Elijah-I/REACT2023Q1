@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { uploadCards } from './service';
+import cardService from './service';
 import Search from 'components/Search';
 import Loader from 'components/Loader';
 import Cards from 'components/Cards';
@@ -19,7 +19,7 @@ const Main = () => {
   }, []);
 
   const getCards = async () => {
-    const cards = await uploadCards();
+    const cards = await cardService.uploadCards();
     setCards(cards);
   };
 

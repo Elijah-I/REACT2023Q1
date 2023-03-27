@@ -6,20 +6,12 @@ interface PopupProps {
   show: boolean;
 }
 
-class Popup extends React.PureComponent<PopupProps> {
-  render() {
-    return (
-      <CSSTransition
-        in={this.props.show}
-        timeout={300}
-        classNames="popup"
-        mountOnEnter
-        unmountOnExit
-      >
-        <div className="popup__content">Card successfully have been created</div>
-      </CSSTransition>
-    );
-  }
-}
+const Popup = ({ show }: PopupProps) => {
+  return (
+    <CSSTransition in={show} timeout={300} classNames="popup" mountOnEnter unmountOnExit>
+      <div className="popup__content">Card successfully have been created</div>
+    </CSSTransition>
+  );
+};
 
 export default Popup;

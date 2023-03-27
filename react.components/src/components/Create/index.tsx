@@ -13,46 +13,39 @@ interface CreateState {
   showPopup: boolean;
 }
 
-class Create extends React.PureComponent {
-  state: CreateState;
+const Create = () => {
+  const [cards, setCards] = React.useState<Card[]>([]);
+  const [showPopup, setShowPopup] = React.useState(false);
 
-  constructor(props: object) {
-    super(props);
+  const wait = (milliseconds: number) => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, milliseconds);
+    });
+  };
 
-    this.state = {
-      cards: [],
-      showPopup: false,
+  React.useEffect(() => {
+    const checkPopUp = async () => {
+      if (showPopup) {
+        await wait(3000);
+        setShowPopup(false);
+      }
     };
 
-    this.onCreate = this.onCreate.bind(this);
-  }
+    checkPopUp();
+  }, [showPopup]);
 
-  componentDidUpdate() {
-    if (this.state.showPopup) {
-      setTimeout(() => {
-        this.setState({
-          showPopup: false,
-        });
-      }, 3000);
-    }
-  }
+  const onCreate = (card: Card) => {
+    setShowPopup(true);
+    setCards([...cards, card]);
+  };
 
-  onCreate(card: Card) {
-    this.setState({
-      showPopup: true,
-      cards: [...this.state.cards, card],
-    });
-  }
-
-  render() {
-    return (
-      <div className="create">
-        <CreateForm onCreate={this.onCreate} index={this.state.cards.length} />
-        <Cards cards={this.state.cards} />
-        <Popup show={this.state.showPopup} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="create">
+      <CreateForm onCreate={onCreate} index={cards.length} />
+      <Cards cards={cards} />
+      <Popup show={showPopup} />
+    </div>
+  );
+};
 
 export default Create;

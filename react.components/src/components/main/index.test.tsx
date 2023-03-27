@@ -6,8 +6,10 @@ import renderWithRouter from 'tests/renderWithRouter';
 import Main from '.';
 
 describe('Main', () => {
+  let uploadCards;
+
   beforeAll(() => {
-    vi.spyOn(Main.prototype, 'readCards').mockImplementation(async () => {
+    uploadCards = async () => {
       return Promise.resolve([
         {
           id: 0,
@@ -33,7 +35,7 @@ describe('Main', () => {
           },
         },
       ]);
-    });
+    };
   });
 
   it('renders Search component', () => {

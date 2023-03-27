@@ -5,60 +5,48 @@ import Loader from 'components/Loader';
 import Cards from 'components/Cards';
 
 import { SearchState } from 'types/search.types';
-import { MainState } from 'types/main.types';
+import { Card } from 'types/card.types';
 
 import './index.scss';
 
-class Main extends React.PureComponent {
-  state: MainState;
+const uploadCards = async () => {
+  return (await import('./../../model/cards.json')).default as Card[];
+};
 
-  constructor(props: object) {
-    super(props);
+const Main = () => {
+  const [search, setSearch] = React.useState<SearchState | null>(null);
+  const [cards, setCards] = React.useState<Card[] | null>(null);
 
-    this.state = {
-      search: null,
-      cards: null,
+  const makeSearch = (searchState: SearchState | null) => {
+    setSearch(searchState || null);
+  };
+
+  const getCards = async () => {
+    const cards = await uploadCards();
+    setCards(cards);
+  };
+
+  React.useEffect(() => {
+    const loadCards = async () => {
+      await getCards();
     };
 
-    this.makeSearch = this.makeSearch.bind(this);
-    this.getCards = this.getCards.bind(this);
-  }
+    loadCards();
+  }, []);
 
-  async componentDidMount() {
-    await this.getCards();
-  }
+  return (
+    <div className="main">
+      <Search makeSearch={makeSearch} />
 
-  makeSearch(searchState: SearchState | null) {
-    this.setState({
-      search: searchState || null,
-    });
-  }
-
-  async readCards() {
-    return (await import('./../../model/cards.json')).default;
-  }
-
-  async getCards() {
-    this.setState({
-      cards: await this.readCards(),
-    });
-  }
-
-  render() {
-    return (
-      <div className="main">
-        <Search makeSearch={this.makeSearch} />
-
-        {this.state.search && this.state.cards ? (
-          <Cards cards={this.state.cards} search={this.state.search} />
-        ) : (
-          <div className="main__loader">
-            <Loader />
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+      {search && cards ? (
+        <Cards cards={cards} search={search} />
+      ) : (
+        <div className="main__loader">
+          <Loader />
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Main;

@@ -8,24 +8,18 @@ interface SelectProps {
   forwardedRef: React.RefObject<HTMLSelectElement>;
 }
 
-class Select extends React.PureComponent<SelectProps> {
-  render() {
-    const containerClassName = ['input__label'];
-    if (this.props.error) containerClassName.push('input__label--error');
+const Select = ({ error, title, forwardedRef, onFocus, children }: SelectProps) => {
+  const containerClassName = ['input__label'];
+  if (error) containerClassName.push('input__label--error');
 
-    return (
-      <div className="input__element">
-        <div className={containerClassName.join(' ')}>{this.props.error || this.props.title}</div>
-        <select
-          ref={this.props.forwardedRef}
-          onMouseDown={this.props.onFocus}
-          className="white-box"
-        >
-          {this.props.children}
-        </select>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="input__element">
+      <div className={containerClassName.join(' ')}>{error || title}</div>
+      <select ref={forwardedRef} onMouseDown={onFocus} className="white-box">
+        {children}
+      </select>
+    </div>
+  );
+};
 
 export default Select;

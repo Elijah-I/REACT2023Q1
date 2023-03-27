@@ -9,93 +9,65 @@ import { OPTION, SearchProps, SearchState, SPACE } from 'types/search.types';
 
 import './index.scss';
 
-class Search extends React.PureComponent<SearchProps> {
-  state: SearchState;
+const Search = ({ makeSearch }: SearchProps) => {
+  const [option, setOption] = React.useState(OPTION.ALL);
+  const [space, setSpace] = React.useState(SPACE.LOCAL);
+  const [search, setSearch] = React.useState(localStorage.getItem('search.state') || '');
 
-  constructor(props: SearchProps) {
-    super(props);
-
-    this.state = {
-      option: OPTION.ALL,
-      space: SPACE.LOCAL,
-      search: '',
-    };
-
-    this.makeSearch = this.makeSearch.bind(this);
-    this.saveState = this.saveState.bind(this);
-    this.setSearch = this.setSearch.bind(this);
-    this.setOption = this.setOption.bind(this);
-    this.setSpace = this.setSpace.bind(this);
-  }
-
-  async componentDidMount() {
-    const lsState = localStorage.getItem('search.state');
-    if (lsState) this.setState({ ...JSON.parse(lsState) });
-    await this.makeSearch();
-  }
-
-  componentDidUpdate() {
-    this.saveState();
-  }
-
-  componentWillUnmount() {
-    this.saveState();
-  }
-
-  saveState() {
-    localStorage.setItem('search.state', JSON.stringify(this.state));
-  }
-
-  async makeSearch(event?: React.SyntheticEvent) {
-    if (event) event.preventDefault();
-
-    this.props.makeSearch(null);
-
-    await this.wait(1000);
-    this.props.makeSearch(this.state);
-  }
-
-  wait(milliseconds: number) {
+  const wait = (milliseconds: number) => {
     return new Promise((resolve) => {
       setTimeout(resolve, milliseconds);
     });
-  }
+  };
 
-  setOption(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({
-      option: event.currentTarget.value,
-    });
-  }
+  const doSearch = async (event?: React.SyntheticEvent) => {
+    if (event) event.preventDefault();
 
-  setSpace(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({
-      space: event.currentTarget.value,
-    });
-  }
+    makeSearch(null);
 
-  setSearch(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({
-      search: event.currentTarget.value,
-    });
-  }
+    await wait(1000);
+    makeSearch({ option, space, search });
+  };
 
-  render() {
-    return (
-      <Form role="form" onSubmit={async () => await this.makeSearch()}>
-        <div className="search__wrapper">
-          <SearchLine
-            option={this.state.option}
-            search={this.state.search}
-            setSearch={this.setSearch}
+  React.useEffect(() => {
+    const loadSearch = async () => {
+      await doSearch();
+    };
+
+    loadSearch();
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem('search.state', search);
+  }, [search]);
+
+  return (
+    <Form role="form" onSubmit={async () => await doSearch()}>
+      <div className="search__wrapper">
+        <SearchLine
+          option={option}
+          search={search}
+          setSearch={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setSearch(event.currentTarget.value)
+          }
+        />
+        <div className="search__config">
+          <Spaces
+            space={space}
+            setSpace={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setSpace(event.currentTarget.value as SPACE)
+            }
           />
-          <div className="search__config">
-            <Spaces space={this.state.space} setSpace={this.setSpace} />
-            <Options option={this.state.option} setOption={this.setOption} />
-          </div>
+          <Options
+            option={option}
+            setOption={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setOption(event.currentTarget.value as OPTION)
+            }
+          />
         </div>
-      </Form>
-    );
-  }
-}
+      </div>
+    </Form>
+  );
+};
 
 export default Search;

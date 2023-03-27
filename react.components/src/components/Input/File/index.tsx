@@ -1,23 +1,26 @@
 import React from 'react';
+import type { FieldError, UseFormRegister, UseFormWatch } from 'react-hook-form/dist/types';
+import type { FormValues } from 'types/create.types';
 import './index.scss';
 
 interface InputFileProps {
-  error?: string;
+  watch: UseFormWatch<FormValues>;
+  name: keyof FormValues;
+  error: FieldError | undefined;
+  register: UseFormRegister<FormValues>;
   onClick: () => void;
-  forwardedRef: React.RefObject<HTMLInputElement>;
 }
 
-const InputFile = ({ error, onClick, forwardedRef }: InputFileProps) => {
+const InputFile = ({ name, error, onClick, watch, register }: InputFileProps) => {
+  const files = watch(name);
   const [image, setImage] = React.useState('');
-
-  const handleChange = () => {
-    const files = forwardedRef.current?.files;
-
-    setImage(files ? files[0].name : '');
-  };
 
   const containerClassName = ['input__file'];
   if (error) containerClassName.push('input__file--error');
+
+  React.useEffect(() => {
+    setImage(files && files.length ? (files as FileList)[0].name : '');
+  }, [files]);
 
   return (
     <div className="input__element">
@@ -28,8 +31,8 @@ const InputFile = ({ error, onClick, forwardedRef }: InputFileProps) => {
         <br />
         Click to add
         <div className="delimiter"></div>
-        <div className="image-label">{error || image || '[ no image atteched ]'}</div>
-        <input type="file" onClick={onClick} ref={forwardedRef} onChange={handleChange} />
+        <div className="image-label">{error?.message || image || '[ no image atteched ]'}</div>
+        <input type="file" onClick={onClick} {...register(name)} />
       </div>
     </div>
   );

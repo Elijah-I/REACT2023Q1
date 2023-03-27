@@ -1,21 +1,23 @@
 import React, { ReactNode } from 'react';
+import type { FieldError, UseFormRegister } from 'react-hook-form/dist/types';
+import { FormValues } from 'types/create.types';
 
 interface SelectProps {
+  name: keyof FormValues;
   children: ReactNode;
-  error?: string;
-  title: string;
+  error: FieldError | undefined;
+  register: UseFormRegister<FormValues>;
   onFocus: () => void;
-  forwardedRef: React.RefObject<HTMLSelectElement>;
 }
 
-const Select = ({ error, title, forwardedRef, onFocus, children }: SelectProps) => {
+const Select = ({ error, name, register, onFocus, children }: SelectProps) => {
   const containerClassName = ['input__label'];
   if (error) containerClassName.push('input__label--error');
 
   return (
     <div className="input__element">
-      <div className={containerClassName.join(' ')}>{error || title}</div>
-      <select ref={forwardedRef} onMouseDown={onFocus} className="white-box">
+      <div className={containerClassName.join(' ')}>{error?.message || name}</div>
+      <select {...register(name)} onMouseDown={onFocus} className="white-box">
         {children}
       </select>
     </div>

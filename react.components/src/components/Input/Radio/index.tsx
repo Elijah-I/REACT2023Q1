@@ -1,42 +1,37 @@
 import React from 'react';
-import { v4 as uniqid } from 'uuid';
+import type { FieldError, UseFormRegister } from 'react-hook-form/dist/types';
+import type { FormValues } from 'types/create.types';
 import './index.scss';
 
-type Element = {
-  label: string;
-  forwardedRef: React.RefObject<HTMLInputElement>;
-};
-
 interface InputRadioGroupProps {
-  title: string;
-  error?: string;
+  name: keyof FormValues;
+  error: FieldError | undefined;
+  register: UseFormRegister<FormValues>;
   onFocus: () => void;
-  elements: Element[];
+  elements: string[];
 }
 
-const InputRadioGroup = ({ error, title, onFocus, elements }: InputRadioGroupProps) => {
-  const groupUniqId = uniqid();
+const InputRadioGroup = ({ error, name, onFocus, register, elements }: InputRadioGroupProps) => {
   const containerClassName = ['input__label'];
   if (error) containerClassName.push('input__label--error');
 
   return (
     <div className="input__element input__element--horisontal white-box">
-      <div className={containerClassName.join(' ')}>{error || title}</div>
-      {elements.map((element) => {
-        const uniqId = uniqid();
+      <div className={containerClassName.join(' ')}>{error?.message || name}</div>
+      {elements.map((element, i) => {
+        const uniqId = `rb-${Date.now()}-${i}`;
 
         return (
           <div className="radio" key={uniqId}>
             <input
               type="radio"
-              name={groupUniqId}
               id={uniqId}
               onClick={onFocus}
-              defaultChecked={element.forwardedRef.current?.checked}
-              ref={element.forwardedRef}
-              data-value={element.label}
+              {...register(name)}
+              value={element}
+              data-value={element}
             />
-            <label htmlFor={uniqId}>{element.label}</label>
+            <label htmlFor={uniqId}>{element}</label>
           </div>
         );
       })}

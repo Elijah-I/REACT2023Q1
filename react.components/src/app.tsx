@@ -17,22 +17,18 @@ import ROUTES from 'types/routes.types';
 
 import './styles/app.scss';
 
-class App extends React.Component {
-  render() {
-    const router = createHashRouter(
-      createRoutesFromElements(
-        <Route path={ROUTES.ROOT} element={<Root />}>
-          <Route index element={<Main />} />
-          <Route path={ROUTES.ABOUT} element={<About />} />
-          <Route path={ROUTES.CREATE} element={<Create />} />
-          <Route path="/*" element={<Error />} />
-        </Route>
-      )
-    );
+const router = createHashRouter(
+  createRoutesFromElements(
+    <Route path={ROUTES.ROOT} element={<Root />}>
+      <Route index element={<Main />} />
+      <Route path={ROUTES.ABOUT} element={<About />} />
+      <Route path={ROUTES.CREATE} element={<Create />} />
+      <Route path="/*" element={<Error />} />
+    </Route>
+  )
+);
 
-    return <RouterProvider router={router} />;
-  }
-}
+const App = () => <RouterProvider router={router} />;
 
 const root = document.getElementById('root');
 if (root) ReactDOM.createRoot(root).render(<App />);

@@ -1,27 +1,24 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import InputRadioGroup from '.';
+import provideUseFormMethods from 'tests/provideUseFormMethods';
 
 describe('InputRadioGroup', () => {
-  let forwardedRefs: React.RefObject<HTMLInputElement>[];
-
   const expected = {
-    title: 'test title',
+    title: 'author',
     labels: ['Elijah', 'Neo'],
   };
 
-  beforeAll(() => {
-    forwardedRefs = [React.createRef<HTMLInputElement>(), React.createRef<HTMLInputElement>()];
-  });
+  const { register, clearErrors, errors } = provideUseFormMethods();
 
   beforeEach(() => {
     render(
       <InputRadioGroup
-        title={expected.title}
-        elements={[
-          { label: 'Elijah', forwardedRef: forwardedRefs[0] },
-          { label: 'Neo', forwardedRef: forwardedRefs[1] },
-        ]}
+        name="author"
+        error={errors.author}
+        onFocus={() => clearErrors('author')}
+        register={register}
+        elements={expected.labels}
       />
     );
   });

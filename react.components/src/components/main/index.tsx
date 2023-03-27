@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { uploadCards } from './service';
 import Search from 'components/Search';
 import Loader from 'components/Loader';
 import Cards from 'components/Cards';
@@ -9,17 +10,13 @@ import { Card } from 'types/card.types';
 
 import './index.scss';
 
-const uploadCards = async () => {
-  return (await import('./../../model/cards.json')).default as Card[];
-};
-
 const Main = () => {
   const [search, setSearch] = React.useState<SearchState | null>(null);
   const [cards, setCards] = React.useState<Card[] | null>(null);
 
-  const makeSearch = (searchState: SearchState | null) => {
+  const makeSearch = React.useCallback((searchState: SearchState | null) => {
     setSearch(searchState || null);
-  };
+  }, []);
 
   const getCards = async () => {
     const cards = await uploadCards();

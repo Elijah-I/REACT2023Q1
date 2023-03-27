@@ -1,25 +1,38 @@
 import React from 'react';
 import 'jsdom-worker';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { vi } from 'vitest';
 import InputFile from '.';
+import provideUseFormMethods from 'tests/provideUseFormMethods';
 
 describe('InputFile', () => {
   const expected = {
-    error: 'test error',
+    error: { type: 'required', message: 'test error' },
   };
-  const mockFn = vi.fn;
   const mockFile = new File(['test'], 'test.png', { type: 'image/png' });
-  const forwardedRef = React.createRef<HTMLInputElement>();
+  const { register, clearErrors, watch } = provideUseFormMethods();
 
   it('renders component with No image attached', () => {
-    render(<InputFile key={1} onClick={mockFn} forwardedRef={forwardedRef} />);
+    render(
+      <InputFile
+        name="file"
+        error={undefined}
+        onClick={() => clearErrors('file')}
+        watch={watch}
+        register={register}
+      />
+    );
     expect(screen.getByText(/no image atteched/i)).toBeInTheDocument();
   });
 
   it('handles uploaded file', async () => {
     const { container } = render(
-      <InputFile key={1} onClick={mockFn} forwardedRef={forwardedRef} />
+      <InputFile
+        name="file"
+        error={expected.error}
+        onClick={() => clearErrors('file')}
+        watch={watch}
+        register={register}
+      />
     );
 
     const uploader = container.getElementsByTagName('input')[0];
@@ -39,8 +52,14 @@ describe('InputFile', () => {
 
   it('renders component with Error', async () => {
     render(
-      <InputFile key={1} onClick={mockFn} forwardedRef={forwardedRef} error={expected.error} />
+      <InputFile
+        name="file"
+        error={expected.error}
+        onClick={() => clearErrors('file')}
+        watch={watch}
+        register={register}
+      />
     );
-    expect(screen.getByText(expected.error)).toBeInTheDocument();
+    expect(screen.getByText(expected.error.message)).toBeInTheDocument();
   });
 });

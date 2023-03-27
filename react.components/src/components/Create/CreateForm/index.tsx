@@ -44,8 +44,6 @@ const CreateForm = ({ onCreate, index }: CreateFormProps) => {
   };
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log(data);
-
     if (!Object.keys(data).length) return;
     setIsSubmitting(true);
 

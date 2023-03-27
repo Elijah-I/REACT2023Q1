@@ -1,24 +1,25 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { vi } from 'vitest';
 import InputCheckbox from '.';
+import provideUseFormMethods from 'tests/provideUseFormMethods';
 
 describe('InputCheckbox', () => {
   const expected = {
     label: 'test label',
-    title: 'test title',
-    error: 'test error',
+    title: 'agreement',
+    error: { type: 'required', message: 'test error' },
   };
-  const mockFn = vi.fn;
-  const forwardedRef = React.createRef<HTMLInputElement>();
+
+  const { register, clearErrors } = provideUseFormMethods();
 
   it('renders component with Title and Label', () => {
     render(
       <InputCheckbox
-        forwardedRef={forwardedRef}
+        name="agreement"
         labelText={expected.label}
-        onClick={mockFn}
-        title={expected.title}
+        error={undefined}
+        onClick={() => clearErrors('agreement')}
+        register={register}
       />
     );
 
@@ -29,14 +30,14 @@ describe('InputCheckbox', () => {
   it('renders component with Error', () => {
     render(
       <InputCheckbox
-        forwardedRef={forwardedRef}
+        name="agreement"
         labelText={expected.label}
         error={expected.error}
-        onClick={mockFn}
-        title={expected.title}
+        onClick={() => clearErrors('agreement')}
+        register={register}
       />
     );
 
-    expect(screen.getByText(expected.error)).toBeInTheDocument();
+    expect(screen.getByText(expected.error.message)).toBeInTheDocument();
   });
 });

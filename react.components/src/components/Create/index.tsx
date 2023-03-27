@@ -8,11 +8,6 @@ import { Card } from 'types/card.types';
 
 import './index.scss';
 
-interface CreateState {
-  cards: Card[];
-  showPopup: boolean;
-}
-
 const Create = () => {
   const [cards, setCards] = React.useState<Card[]>([]);
   const [showPopup, setShowPopup] = React.useState(false);

@@ -1,15 +1,13 @@
 import React from 'react';
+import { screen, act } from '@testing-library/react';
 import { vi } from 'vitest';
-import { screen, waitFor, act } from '@testing-library/react';
 
 import renderWithRouter from 'tests/renderWithRouter';
 import Main from '.';
 
-describe('Main', () => {
-  let uploadCards;
-
-  beforeAll(() => {
-    uploadCards = async () => {
+vi.mock('./service', () => {
+  return {
+    uploadCards: vi.fn().mockImplementation(async () => {
       return Promise.resolve([
         {
           id: 0,
@@ -35,9 +33,11 @@ describe('Main', () => {
           },
         },
       ]);
-    };
-  });
+    }),
+  };
+});
 
+describe('Main', () => {
   it('renders Search component', () => {
     const { container } = renderWithRouter(<Main />);
     const localSearch = container.querySelector('#local-search');
@@ -58,9 +58,7 @@ describe('Main', () => {
     let firstCard = screen.queryByText(/site worse/);
     expect(firstCard).toBe(null);
 
-    waitFor(async () => {
-      firstCard = await screen.findByText(/site worse/);
-      expect(firstCard).toBeInTheDocument();
-    });
+    firstCard = await screen.findByText(/site worse/);
+    expect(firstCard).toBeInTheDocument();
   });
 });

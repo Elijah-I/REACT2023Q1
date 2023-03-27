@@ -1,24 +1,25 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { vi } from 'vitest';
 import InputRegular from '.';
+import provideUseFormMethods from 'tests/provideUseFormMethods';
+import { FormValues } from 'types/create.types';
 
 describe('InputRegular', () => {
   const expected = {
-    title: 'test title',
-    error: 'test error',
+    title: 'title',
+    error: { type: 'required', message: 'test error' },
   };
 
-  const mockFn = vi.fn;
-  const forwardedRef = React.createRef<HTMLInputElement>();
+  const { register, clearErrors, errors } = provideUseFormMethods();
 
   it('renders component with Title', () => {
     render(
       <InputRegular
-        forwardedRef={forwardedRef}
         type="text"
-        onFocus={mockFn}
-        title={expected.title}
+        name={expected.title as keyof FormValues}
+        error={undefined}
+        onFocus={() => clearErrors('title')}
+        register={register}
       />
     );
 
@@ -28,25 +29,25 @@ describe('InputRegular', () => {
   it('renders component with Error', () => {
     render(
       <InputRegular
-        forwardedRef={forwardedRef}
         type="text"
+        name="title"
         error={expected.error}
-        onFocus={mockFn}
-        title={expected.title}
+        onFocus={() => clearErrors('title')}
+        register={register}
       />
     );
 
-    expect(screen.getByText(expected.error)).toBeInTheDocument();
+    expect(screen.getByText(expected.error.message)).toBeInTheDocument();
   });
 
   it('renders component of type Date', () => {
     const { container } = render(
       <InputRegular
-        forwardedRef={forwardedRef}
         type="date"
-        error={expected.error}
-        onFocus={mockFn}
-        title={expected.title}
+        name="date"
+        error={errors.title}
+        onFocus={() => clearErrors('date')}
+        register={register}
       />
     );
 

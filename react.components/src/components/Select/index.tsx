@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import type { FieldError, UseFormRegister } from 'react-hook-form/dist/types';
 import { FormValues } from 'types/create.types';
 
-interface SelectProps {
+export interface SelectProps {
   name: keyof FormValues;
   children: ReactNode;
   error: FieldError | undefined;

@@ -13,7 +13,7 @@ describe('Create', () => {
     expect(screen.getByText(/title/i)).toBeInTheDocument();
     expect(screen.getByText(/tags/i)).toBeInTheDocument();
     expect(screen.getByText(/date/i)).toBeInTheDocument();
-    expect(screen.getByText(/media/i)).toBeInTheDocument();
+    expect(screen.getByText(/type/i)).toBeInTheDocument();
     expect(screen.getByText(/agreement/i)).toBeInTheDocument();
     expect(screen.getByText(/no image/i)).toBeInTheDocument();
     expect(screen.getByText(/create/i)).toBeInTheDocument();

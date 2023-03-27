@@ -7,57 +7,32 @@ interface InputFileProps {
   forwardedRef: React.RefObject<HTMLInputElement>;
 }
 
-interface InputFileState {
-  image: string;
-}
+const InputFile = ({ error, onClick, forwardedRef }: InputFileProps) => {
+  const [image, setImage] = React.useState('');
 
-class InputFile extends React.PureComponent<InputFileProps> {
-  state: InputFileState;
+  const handleChange = () => {
+    const files = forwardedRef.current?.files;
 
-  constructor(props: InputFileProps) {
-    super(props);
+    setImage(files ? files[0].name : '');
+  };
 
-    this.state = {
-      image: '',
-    };
+  const containerClassName = ['input__file'];
+  if (error) containerClassName.push('input__file--error');
 
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange() {
-    const files = this.props.forwardedRef.current?.files;
-
-    this.setState({
-      image: files ? files[0].name : '',
-    });
-  }
-
-  render() {
-    const containerClassName = ['input__file'];
-    if (this.props.error) containerClassName.push('input__file--error');
-
-    return (
-      <div className="input__element">
-        <div className={containerClassName.join(' ')}>
-          Drag and drop your image
-          <br />
-          or
-          <br />
-          Click to add
-          <div className="delimiter"></div>
-          <div className="image-label">
-            {this.props.error || this.state.image || '[ no image atteched ]'}
-          </div>
-          <input
-            type="file"
-            onClick={this.props.onClick}
-            ref={this.props.forwardedRef}
-            onChange={this.handleChange}
-          />
-        </div>
+  return (
+    <div className="input__element">
+      <div className={containerClassName.join(' ')}>
+        Drag and drop your image
+        <br />
+        or
+        <br />
+        Click to add
+        <div className="delimiter"></div>
+        <div className="image-label">{error || image || '[ no image atteched ]'}</div>
+        <input type="file" onClick={onClick} ref={forwardedRef} onChange={handleChange} />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default InputFile;

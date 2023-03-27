@@ -10,24 +10,22 @@ interface InputCheckboxProps {
   forwardedRef: React.RefObject<HTMLInputElement>;
 }
 
-class InputCheckbox extends React.PureComponent<InputCheckboxProps> {
-  render() {
-    const titleClassName = ['input__label'];
-    const uniqID = uniqid();
-    if (this.props.error) titleClassName.push('input__label--error');
+const InputCheckbox = ({ error, title, forwardedRef, onClick, labelText }: InputCheckboxProps) => {
+  const titleClassName = ['input__label'];
+  const uniqID = uniqid();
+  if (error) titleClassName.push('input__label--error');
 
-    return (
-      <div className="input__element white-box">
-        <div className="checkbox">
-          <div className={titleClassName.join(' ')}>{this.props.error || this.props.title}</div>
-          <input type="checkbox" id={uniqID} ref={this.props.forwardedRef} />
-          <label htmlFor={uniqID} onClick={this.props.onClick}>
-            {this.props.labelText}
-          </label>
-        </div>
+  return (
+    <div className="input__element white-box">
+      <div className="checkbox">
+        <div className={titleClassName.join(' ')}>{error || title}</div>
+        <input type="checkbox" id={uniqID} ref={forwardedRef} />
+        <label htmlFor={uniqID} onClick={onClick}>
+          {labelText}
+        </label>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default InputCheckbox;

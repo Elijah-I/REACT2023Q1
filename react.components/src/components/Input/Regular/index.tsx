@@ -9,26 +9,24 @@ interface InputRegularProps {
   onFocus: () => void;
 }
 
-class InputRegular extends React.PureComponent<InputRegularProps> {
-  render() {
-    const titleClassName = ['input__label'];
-    const inputClassName = ['white-box'];
+const InputRegular = ({ error, type, title, forwardedRef, onFocus }: InputRegularProps) => {
+  const titleClassName = ['input__label'];
+  const inputClassName = ['white-box'];
 
-    if (this.props.error) titleClassName.push('input__label--error');
-    if (this.props.type === 'date') inputClassName.push('input--padded-right');
+  if (error) titleClassName.push('input__label--error');
+  if (type === 'date') inputClassName.push('input--padded-right');
 
-    return (
-      <div className="input__element">
-        <div className={titleClassName.join(' ')}>{this.props.error || this.props.title}</div>
-        <input
-          ref={this.props.forwardedRef}
-          type={this.props.type}
-          className={inputClassName.join(' ')}
-          onFocus={this.props.onFocus}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="input__element">
+      <div className={titleClassName.join(' ')}>{error || title}</div>
+      <input
+        ref={forwardedRef}
+        type={type}
+        className={inputClassName.join(' ')}
+        onFocus={onFocus}
+      />
+    </div>
+  );
+};
 
 export default InputRegular;

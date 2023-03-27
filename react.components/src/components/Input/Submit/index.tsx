@@ -6,19 +6,17 @@ interface InputSubmitProps {
   isSubmitting: boolean;
 }
 
-class InputSubmit extends React.PureComponent<InputSubmitProps> {
-  render() {
-    const buttonClassName = ['button'];
-    if (this.props.isSubmitting) buttonClassName.push('button--loading');
+const InputSubmit = ({ isSubmitting, text }: InputSubmitProps) => {
+  const buttonClassName = ['button'];
+  if (isSubmitting) buttonClassName.push('button--loading');
 
-    return (
-      <div className="input__element input__element--right-bottom">
-        <button type="submit" className={buttonClassName.join(' ')}>
-          {this.props.isSubmitting ? '...' : this.props.text}
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="input__element input__element--right-bottom">
+      <button type="submit" className={buttonClassName.join(' ')}>
+        {isSubmitting ? '...' : text}
+      </button>
+    </div>
+  );
+};
 
 export default InputSubmit;

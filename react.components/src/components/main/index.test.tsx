@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, act, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import renderWithRouter from 'tests/renderWithRouter';
@@ -36,18 +36,18 @@ cardService.uploadCards = vi.fn().mockResolvedValue([
 describe('Main', () => {
   it('renders Search component', async () => {
     const { container } = renderWithRouter(<Main />);
+    const localSearch = container.querySelector('#local-search');
 
     await waitFor(() => {
-      const localSearch = container.querySelector('#local-search');
       expect(localSearch).toBeInTheDocument();
     });
   });
 
   it('shows loader while cards are uploading', async () => {
     const { container } = renderWithRouter(<Main />);
+    const loader = container.querySelector('.loader');
 
     await waitFor(() => {
-      const loader = container.querySelector('.loader');
       expect(loader).toBeInTheDocument();
     });
   });
@@ -55,16 +55,14 @@ describe('Main', () => {
   it('shows cards after they are uploaded', async () => {
     let firstCard;
 
-    await act(async () => {
-      renderWithRouter(<Main />);
-    });
+    renderWithRouter(<Main />);
 
-    act(() => {
-      firstCard = screen.queryByText(/site worse/);
-      expect(firstCard).toBe(null);
-    });
+    firstCard = screen.queryByText(/site worse/);
+    expect(firstCard).toBe(null);
 
-    firstCard = await screen.findByText(/site worse/);
-    expect(firstCard).toBeInTheDocument();
+    waitFor(async () => {
+      firstCard = await screen.findByText(/site worse/);
+      expect(firstCard).toBeInTheDocument();
+    });
   });
 });

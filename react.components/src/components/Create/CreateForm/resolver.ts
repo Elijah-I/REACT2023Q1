@@ -1,10 +1,29 @@
 import { Resolver } from 'react-hook-form';
+import { Card } from 'types/card.types';
 import { FormErrors, FormValues } from 'types/create.types';
+import { OPTION } from 'types/search.types';
 
 export const resolver: Resolver<FormValues> = async (values) => {
   const hanldeValues = (values: FormValues) => {
     if (Object.values(values).some((value) => !value)) return {};
-    return values;
+
+    const files = values.file;
+    const file = files ? files[0] : null;
+    const picture = file ? URL.createObjectURL(file) : '';
+
+    const card: Card = {
+      ...values,
+      picture,
+      statistic: {
+        isFavorite: false,
+        likes: 0,
+        views: 0,
+      },
+      type: Object.values(OPTION).find((opt) => opt === values.type),
+      tags: [...values.tags.split(', ')],
+    };
+
+    return card;
   };
 
   const createError = (message: string) => ({

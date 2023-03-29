@@ -32,7 +32,7 @@ const CreateForm = ({ onCreate, index }: CreateFormProps) => {
     reset,
     watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver,
     shouldFocusError: false,
   });
@@ -43,39 +43,22 @@ const CreateForm = ({ onCreate, index }: CreateFormProps) => {
     });
   };
 
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    if (!Object.keys(data).length) return;
+  const onSubmit: SubmitHandler<FormValues | Card> = async (card) => {
+    if (!('picture' in card)) return;
+
     setIsSubmitting(true);
 
     await wait(1000);
 
-    const files = data.file;
-    const file = files ? files[0] : null;
-    const picture = file ? URL.createObjectURL(file) : '';
-
-    const card: Card = {
-      author: data.author,
-      id: index,
-      picture,
-      tags: [...data.tags.split(', ')],
-      title: data.title,
-      type: Object.values(OPTION).find((opt) => opt === data.type),
-      statistic: {
-        isFavorite: false,
-        likes: 0,
-        views: 0,
-      },
-      date: data.date,
-    };
-
     onCreate(card);
-
     setIsSubmitting(false);
+
     reset();
   };
 
   return (
     <form className="create__form" onSubmit={handleSubmit(onSubmit)}>
+      <input type="hidden" {...register('id')} value={index} />
       <Input
         type="text"
         name="title"

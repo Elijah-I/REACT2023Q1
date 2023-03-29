@@ -1,4 +1,5 @@
 export type FormValues = {
+  id: number;
   title: string;
   tags: string;
   date: string;

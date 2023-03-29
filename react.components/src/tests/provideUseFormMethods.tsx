@@ -3,7 +3,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import {
   FieldErrors,
-  UseFormClearErrors,
   UseFormHandleSubmit,
   UseFormRegister,
   UseFormReset,
@@ -15,7 +14,6 @@ import { resolver } from './../components/Create/CreateForm/resolver';
 export default () => {
   const ProvidedMethods = {} as {
     register: UseFormRegister<FormValues>;
-    clearErrors: UseFormClearErrors<FormValues>;
     errors: FieldErrors<FormValues>;
     handleSubmit: UseFormHandleSubmit<FormValues>;
     reset: UseFormReset<FormValues>;
@@ -26,7 +24,6 @@ export default () => {
     const {
       register,
       handleSubmit,
-      clearErrors,
       reset,
       watch,
       formState: { errors },
@@ -39,7 +36,6 @@ export default () => {
     ProvidedMethods.watch = watch;
     ProvidedMethods.errors = errors;
     ProvidedMethods.register = register;
-    ProvidedMethods.clearErrors = clearErrors;
     ProvidedMethods.handleSubmit = handleSubmit;
 
     return <></>;

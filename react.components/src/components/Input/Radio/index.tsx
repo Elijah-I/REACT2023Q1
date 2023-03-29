@@ -7,11 +7,10 @@ interface InputRadioGroupProps {
   name: keyof FormValues;
   error: FieldError | undefined;
   register: UseFormRegister<FormValues>;
-  onFocus: () => void;
   elements: string[];
 }
 
-const InputRadioGroup = ({ error, name, onFocus, register, elements }: InputRadioGroupProps) => {
+const InputRadioGroup = ({ error, name, register, elements }: InputRadioGroupProps) => {
   const containerClassName = ['input__label'];
   if (error) containerClassName.push('input__label--error');
 
@@ -26,7 +25,6 @@ const InputRadioGroup = ({ error, name, onFocus, register, elements }: InputRadi
             <input
               type="radio"
               id={uniqId}
-              onClick={onFocus}
               {...register(name)}
               value={element}
               data-value={element}

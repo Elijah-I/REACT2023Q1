@@ -8,18 +8,17 @@ interface InputFileProps {
   name: keyof FormValues;
   error: FieldError | undefined;
   register: UseFormRegister<FormValues>;
-  onClick: () => void;
 }
 
-const InputFile = ({ name, error, onClick, watch, register }: InputFileProps) => {
-  const files = watch(name);
+const InputFile = ({ name, error, watch, register }: InputFileProps) => {
+  const files = watch(name) as FileList;
   const [image, setImage] = React.useState('');
 
   const containerClassName = ['input__file'];
   if (error) containerClassName.push('input__file--error');
 
   React.useEffect(() => {
-    setImage(files && files.length ? (files as FileList)[0].name : '');
+    setImage(files && files.length ? files[0].name : '');
   }, [files]);
 
   return (
@@ -32,7 +31,7 @@ const InputFile = ({ name, error, onClick, watch, register }: InputFileProps) =>
         Click to add
         <div className="delimiter"></div>
         <div className="image-label">{error?.message || image || '[ no image atteched ]'}</div>
-        <input type="file" onClick={onClick} {...register(name)} />
+        <input type="file" {...register(name)} />
       </div>
     </div>
   );

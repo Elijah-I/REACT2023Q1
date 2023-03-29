@@ -8,10 +8,9 @@ interface InputCheckboxProps {
   labelText: string;
   error: FieldError | undefined;
   register: UseFormRegister<FormValues>;
-  onClick: () => void;
 }
 
-const InputCheckbox = ({ error, name, register, onClick, labelText }: InputCheckboxProps) => {
+const InputCheckbox = ({ error, name, register, labelText }: InputCheckboxProps) => {
   const titleClassName = ['input__label'];
   const uniqID = `cb-${Date.now()}`;
   if (error) titleClassName.push('input__label--error');
@@ -21,9 +20,7 @@ const InputCheckbox = ({ error, name, register, onClick, labelText }: InputCheck
       <div className="checkbox">
         <div className={titleClassName.join(' ')}>{error?.message || name}</div>
         <input type="checkbox" id={uniqID} {...register(name)} />
-        <label htmlFor={uniqID} onClick={onClick}>
-          {labelText}
-        </label>
+        <label htmlFor={uniqID}>{labelText}</label>
       </div>
     </div>
   );

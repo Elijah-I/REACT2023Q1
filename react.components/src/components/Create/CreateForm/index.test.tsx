@@ -129,24 +129,4 @@ describe('CreateForm', () => {
 
     expect(cbMock).toBeCalledTimes(1);
   });
-
-  it('drops validation error on focus', async () => {
-    const { container } = render(<CreateForm index={1} onCreate={mockFn} />);
-
-    await waitFor(() => {
-      fireEvent.change(screen.getAllByRole('textbox')[1], { target: { value: 'mock' } });
-      fireEvent.change(container.querySelector('[type="date"]')!, {
-        target: { value: '2020-05-12' },
-      });
-      fireEvent.click(screen.getByText(/create/i));
-    });
-
-    expect(screen.getByText(/field is required/i)).toBeInTheDocument();
-
-    await waitFor(() => {
-      fireEvent.focus(screen.getAllByRole('textbox')[0]);
-    });
-
-    expect(screen.queryByText(/field is required/i)).not.toBeInTheDocument();
-  });
 });

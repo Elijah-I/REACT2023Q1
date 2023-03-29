@@ -8,10 +8,9 @@ interface InputRegularProps {
   type: 'text' | 'date';
   error: FieldError | undefined;
   register: UseFormRegister<FormValues>;
-  onFocus: () => void;
 }
 
-const InputRegular = ({ error, type, name, register, onFocus }: InputRegularProps) => {
+const InputRegular = ({ error, type, name, register }: InputRegularProps) => {
   const titleClassName = ['input__label'];
   const inputClassName = ['white-box'];
 
@@ -21,12 +20,7 @@ const InputRegular = ({ error, type, name, register, onFocus }: InputRegularProp
   return (
     <div className="input__element">
       <div className={titleClassName.join(' ')}>{error?.message || name}</div>
-      <input
-        {...register(name)}
-        type={type}
-        className={inputClassName.join(' ')}
-        onFocus={onFocus}
-      />
+      <input {...register(name)} type={type} className={inputClassName.join(' ')} />
     </div>
   );
 };

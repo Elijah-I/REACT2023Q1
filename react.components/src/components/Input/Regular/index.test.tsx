@@ -10,7 +10,7 @@ describe('InputRegular', () => {
     error: { type: 'required', message: 'test error' },
   };
 
-  const { register, clearErrors, errors } = provideUseFormMethods();
+  const { register, errors } = provideUseFormMethods();
 
   it('renders component with Title', () => {
     render(
@@ -18,7 +18,6 @@ describe('InputRegular', () => {
         type="text"
         name={expected.title as keyof FormValues}
         error={undefined}
-        onFocus={() => clearErrors('title')}
         register={register}
       />
     );
@@ -27,28 +26,14 @@ describe('InputRegular', () => {
   });
 
   it('renders component with Error', () => {
-    render(
-      <InputRegular
-        type="text"
-        name="title"
-        error={expected.error}
-        onFocus={() => clearErrors('title')}
-        register={register}
-      />
-    );
+    render(<InputRegular type="text" name="title" error={expected.error} register={register} />);
 
     expect(screen.getByText(expected.error.message)).toBeInTheDocument();
   });
 
   it('renders component of type Date', () => {
     const { container } = render(
-      <InputRegular
-        type="date"
-        name="date"
-        error={errors.title}
-        onFocus={() => clearErrors('date')}
-        register={register}
-      />
+      <InputRegular type="date" name="date" error={errors.title} register={register} />
     );
 
     expect(container.querySelector('[type="date"]')).toBeInTheDocument();

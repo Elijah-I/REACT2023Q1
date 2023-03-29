@@ -9,14 +9,13 @@ describe('InputRadioGroup', () => {
     labels: ['Elijah', 'Neo'],
   };
 
-  const { register, clearErrors, errors } = provideUseFormMethods();
+  const { register, errors } = provideUseFormMethods();
 
   beforeEach(() => {
     render(
       <InputRadioGroup
         name="author"
         error={errors.author}
-        onFocus={() => clearErrors('author')}
         register={register}
         elements={expected.labels}
       />

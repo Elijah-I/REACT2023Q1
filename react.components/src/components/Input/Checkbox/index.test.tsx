@@ -10,7 +10,7 @@ describe('InputCheckbox', () => {
     error: { type: 'required', message: 'test error' },
   };
 
-  const { register, clearErrors } = provideUseFormMethods();
+  const { register } = provideUseFormMethods();
 
   it('renders component with Title and Label', () => {
     render(
@@ -18,7 +18,6 @@ describe('InputCheckbox', () => {
         name="agreement"
         labelText={expected.label}
         error={undefined}
-        onClick={() => clearErrors('agreement')}
         register={register}
       />
     );
@@ -33,7 +32,6 @@ describe('InputCheckbox', () => {
         name="agreement"
         labelText={expected.label}
         error={expected.error}
-        onClick={() => clearErrors('agreement')}
         register={register}
       />
     );

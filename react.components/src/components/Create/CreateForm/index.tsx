@@ -28,12 +28,13 @@ const CreateForm = ({ onCreate, index }: CreateFormProps) => {
   const {
     register,
     handleSubmit,
-    clearErrors,
     reset,
     watch,
     formState: { errors },
   } = useForm<FormValues>({
     resolver,
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
     shouldFocusError: false,
   });
 
@@ -59,36 +60,13 @@ const CreateForm = ({ onCreate, index }: CreateFormProps) => {
   return (
     <form className="create__form" onSubmit={handleSubmit(onSubmit)}>
       <input type="hidden" {...register('id')} value={index} />
-      <Input
-        type="text"
-        name="title"
-        error={errors.title}
-        onFocus={() => clearErrors('title')}
-        register={register}
-      />
+      <Input type="text" name="title" error={errors.title} register={register} />
 
-      <Input
-        type="text"
-        name="tags"
-        error={errors.tags}
-        onFocus={() => clearErrors('tags')}
-        register={register}
-      />
+      <Input type="text" name="tags" error={errors.tags} register={register} />
 
-      <Input
-        type="date"
-        name="date"
-        error={errors?.date}
-        onFocus={() => clearErrors('date')}
-        register={register}
-      />
+      <Input type="date" name="date" error={errors?.date} register={register} />
 
-      <Select
-        name="type"
-        onFocus={() => clearErrors('type')}
-        error={errors.type}
-        register={register}
-      >
+      <Select name="type" error={errors.type} register={register}>
         <option></option>
         {Object.keys(OPTION).map((optKey) => {
           const option = OPTION[optKey as keyof typeof OPTION];
@@ -105,25 +83,17 @@ const CreateForm = ({ onCreate, index }: CreateFormProps) => {
         name="agreement"
         labelText="I take a full responsibility for the content I post"
         error={errors.agreement}
-        onClick={() => clearErrors('agreement')}
         register={register}
       />
 
       <InputRadioGroup
         name="author"
         error={errors.author}
-        onFocus={() => clearErrors('author')}
         register={register}
         elements={['Elijah', 'Neo', 'Joxi']}
       />
 
-      <InputFile
-        name="file"
-        error={errors.file}
-        onClick={() => clearErrors('file')}
-        watch={watch}
-        register={register}
-      />
+      <InputFile name="file" error={errors.file} watch={watch} register={register} />
       <InputSubmit text="create" isSubmitting={isSubmitting} />
     </form>
   );

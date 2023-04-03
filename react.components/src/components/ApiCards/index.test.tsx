@@ -1,86 +1,55 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
-
-import { Card as ICard } from 'types/card.types';
-import { OPTION, SearchState, SPACE } from 'types/search.types';
+import { ApiCard } from 'types/api.card.types';
+import renderWithRouter from 'tests/renderWithRouter';
 import Cards from '.';
 
-describe('Card', () => {
-  const cards: ICard[] = [
+describe('ApiCards', () => {
+  const cards: ApiCard[] = [
     {
-      id: 0,
-      title: 'Make your site better',
-      author: 'Elijah',
-      type: 'photo',
-      tags: ['IT', 'SEO', 'Listing'],
-      picture: 'https://www.interfax.ru/ftproot/textphotos/2022/06/14/tt700.jpg',
-      statistic: { views: 524, likes: 17, isFavorite: true },
+      created: '2017-11-04T18:48:46.250Z',
+      episode: [
+        'https://rickandmortyapi.com/api/episode/1',
+        'https://rickandmortyapi.com/api/episode/2',
+      ],
+      gender: 'Male',
+      id: 1,
+      image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+      location: { name: 'Citadel of Ricks', url: '' },
+      name: 'Rick Sanchez',
+      origin: { name: 'Earth (C-137)', url: '' },
+      species: 'Human',
+      status: 'Alive',
+      type: '',
+      url: 'https://rickandmortyapi.com/api/character/1',
     },
     {
-      id: 1,
-      title: 'Rest',
-      author: 'Sam',
-      type: 'video',
-      tags: ['Nature', 'Sun', 'Sea', 'Beach'],
-      picture:
-        'https://w0.peakpx.com/wallpaper/23/442/HD-wallpaper-nature-sea-sky-skyline-sun-tree-nature-trees-sun-skyline-sea-sky.jpg',
-      statistic: {
-        views: 11585,
-        likes: 2585,
-        isFavorite: false,
-      },
+      created: '2017-11-04T18:50:21.651Z',
+      episode: [
+        'https://rickandmortyapi.com/api/episode/1',
+        'https://rickandmortyapi.com/api/episode/2',
+      ],
+      gender: 'Male',
+      id: 2,
+      image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+      location: { name: 'Citadel of Ricks', url: '' },
+      name: 'Morty Smith',
+      origin: { name: 'unknown', url: '' },
+      species: 'Human',
+      status: 'Alive',
+      type: '',
+      url: 'https://rickandmortyapi.com/api/character/2',
     },
   ];
 
-  const searchState: SearchState = {
-    option: OPTION.ALL,
-    space: SPACE.LOCAL,
-    search: '',
-  };
-
-  beforeAll(() => {
-    searchState.search = '';
-    searchState.space = SPACE.LOCAL;
-    searchState.option = OPTION.ALL;
-  });
-
   it('renders 2 cards', () => {
-    render(<Cards search={searchState} cards={cards} />);
-    expect(screen.getByText(/SEO/)).toBeInTheDocument();
-    expect(screen.getByText(/Nature/)).toBeInTheDocument();
-  });
-
-  it('filters card by search in Tag', () => {
-    searchState.search = 'SEO';
-    render(<Cards search={searchState} cards={cards} />);
-    expect(screen.getByText(/SEO/)).toBeInTheDocument();
-    expect(screen.queryByText(/Nature/)).not.toBeInTheDocument();
-  });
-
-  it('filters card by search in Author', () => {
-    searchState.search = 'Elijah';
-    render(<Cards search={searchState} cards={cards} />);
-    expect(screen.getByText(/SEO/)).toBeInTheDocument();
-    expect(screen.queryByText(/Nature/)).not.toBeInTheDocument();
-  });
-
-  it('filters card by search in Title', () => {
-    searchState.search = 'Make';
-    render(<Cards search={searchState} cards={cards} />);
-    expect(screen.getByText(/SEO/)).toBeInTheDocument();
-    expect(screen.queryByText(/Nature/)).not.toBeInTheDocument();
-  });
-
-  it('filters card by option', () => {
-    searchState.option = OPTION.PHOTO;
-    render(<Cards search={searchState} cards={cards} />);
-    expect(screen.getByText(/SEO/)).toBeInTheDocument();
-    expect(screen.queryByText(/Nature/)).not.toBeInTheDocument();
+    renderWithRouter(<Cards cards={cards} />);
+    expect(screen.getByText(/Rick Sanchez/)).toBeInTheDocument();
+    expect(screen.getByText(/Morty Smith/)).toBeInTheDocument();
   });
 
   it('returns no cards found on wrong search', () => {
-    searchState.search = 'nothing';
-    render(<Cards search={searchState} cards={cards} />);
+    render(<Cards cards={[]} />);
     expect(screen.getByText(/no cards found/)).toBeInTheDocument();
   });
 });

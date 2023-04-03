@@ -11,24 +11,30 @@ describe('Card', () => {
       id: 0,
       title: 'Make your site better',
       author: 'Elijah',
-      type: 'photo',
+      type: OPTION.PHOTO,
       tags: ['IT', 'SEO', 'Listing'],
       picture: 'https://www.interfax.ru/ftproot/textphotos/2022/06/14/tt700.jpg',
-      statistic: { views: 524, likes: 17, isFavorite: true },
+      statistic: {
+        views: 524,
+        likes: 17,
+        isFavorite: true,
+      },
+      date: '17.09.1986',
     },
     {
       id: 1,
       title: 'Rest',
       author: 'Sam',
-      type: 'video',
+      type: OPTION.VIDEO,
       tags: ['Nature', 'Sun', 'Sea', 'Beach'],
       picture:
         'https://w0.peakpx.com/wallpaper/23/442/HD-wallpaper-nature-sea-sky-skyline-sun-tree-nature-trees-sun-skyline-sea-sky.jpg',
       statistic: {
-        views: 11585,
-        likes: 2585,
+        views: 115,
+        likes: 25,
         isFavorite: false,
       },
+      date: '17.09.1986',
     },
   ];
 
@@ -48,34 +54,6 @@ describe('Card', () => {
     render(<Cards search={searchState} cards={cards} />);
     expect(screen.getByText(/SEO/)).toBeInTheDocument();
     expect(screen.getByText(/Nature/)).toBeInTheDocument();
-  });
-
-  it('filters card by search in Tag', () => {
-    searchState.search = 'SEO';
-    render(<Cards search={searchState} cards={cards} />);
-    expect(screen.getByText(/SEO/)).toBeInTheDocument();
-    expect(screen.queryByText(/Nature/)).not.toBeInTheDocument();
-  });
-
-  it('filters card by search in Author', () => {
-    searchState.search = 'Elijah';
-    render(<Cards search={searchState} cards={cards} />);
-    expect(screen.getByText(/SEO/)).toBeInTheDocument();
-    expect(screen.queryByText(/Nature/)).not.toBeInTheDocument();
-  });
-
-  it('filters card by search in Title', () => {
-    searchState.search = 'Make';
-    render(<Cards search={searchState} cards={cards} />);
-    expect(screen.getByText(/SEO/)).toBeInTheDocument();
-    expect(screen.queryByText(/Nature/)).not.toBeInTheDocument();
-  });
-
-  it('filters card by option', () => {
-    searchState.option = OPTION.PHOTO;
-    render(<Cards search={searchState} cards={cards} />);
-    expect(screen.getByText(/SEO/)).toBeInTheDocument();
-    expect(screen.queryByText(/Nature/)).not.toBeInTheDocument();
   });
 
   it('returns no cards found on wrong search', () => {

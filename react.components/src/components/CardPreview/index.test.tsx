@@ -1,10 +1,9 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { ApiCard } from 'types/api.card.types';
-import renderWithRouter from 'tests/renderWithRouter';
-import Card from '.';
+import CardPreview from '.';
 
-describe('ApiCard', () => {
+describe('CardPreview', () => {
   const card: ApiCard = {
     created: '2017-11-04T18:48:46.250Z',
     episode: [
@@ -24,7 +23,7 @@ describe('ApiCard', () => {
   };
 
   beforeEach(() => {
-    renderWithRouter(<Card key="0" info={card} />);
+    render(<CardPreview info={card} />);
   });
 
   it('renders card with image src and alt="preview"', () => {
@@ -43,5 +42,17 @@ describe('ApiCard', () => {
 
   it('renders card with location', () => {
     expect(screen.getByText(card.location.name)).toBeInTheDocument();
+  });
+
+  it('renders card with origin', () => {
+    expect(screen.getByText(card.origin.name)).toBeInTheDocument();
+  });
+
+  it('renders card with status', () => {
+    expect(screen.getByText(card.status)).toBeInTheDocument();
+  });
+
+  it('renders card with episodes amount', () => {
+    expect(screen.getByText(card.episode.length)).toBeInTheDocument();
   });
 });

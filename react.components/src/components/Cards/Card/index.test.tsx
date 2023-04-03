@@ -3,16 +3,18 @@ import { screen, render } from '@testing-library/react';
 
 import { Card as ICard } from 'types/card.types';
 import Card from '.';
+import { OPTION } from 'types/search.types';
 
 describe('Card', () => {
   const card: ICard = {
     id: 0,
     title: 'Make your site better',
     author: 'Elijah',
-    type: 'photo',
+    type: OPTION.PHOTO,
     tags: ['IT', 'SEO', 'Listing'],
     picture: 'https://www.interfax.ru/ftproot/textphotos/2022/06/14/tt700.jpg',
     statistic: { views: 524, likes: 17, isFavorite: true },
+    date: '17.09.1986',
   };
 
   beforeEach(() => {

@@ -16,6 +16,8 @@ export default {
     );
     const data = await response.json();
 
+    if (data.error) return [[], 0];
+
     const cards: ApiCard[] = data.results;
     const totalPages: number = data.info.pages;
 

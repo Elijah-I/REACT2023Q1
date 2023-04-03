@@ -36,7 +36,7 @@ cardService.uploadCards = vi.fn().mockResolvedValue([
 describe('Main', () => {
   it('renders Search component', async () => {
     const { container } = renderWithRouter(<Main />);
-    const localSearch = container.querySelector('#local-search');
+    const localSearch = container.querySelector('.search__line');
 
     await waitFor(() => {
       expect(localSearch).toBeInTheDocument();

@@ -1,6 +1,6 @@
 import React from 'react';
-import './index.scss';
 import { useSearchParams } from 'react-router-dom';
+import './index.scss';
 
 interface PaginationProps {
   totalPages: number;

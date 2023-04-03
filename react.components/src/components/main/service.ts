@@ -21,4 +21,11 @@ export default {
 
     return [cards, totalPages];
   },
+
+  uploadCard: async (id: string) => {
+    const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
+    const card: ApiCard = await response.json();
+
+    return card;
+  },
 };

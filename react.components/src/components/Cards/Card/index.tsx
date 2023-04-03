@@ -1,10 +1,20 @@
 import React from 'react';
 import { ApiCardProps } from 'types/api.card.types';
 import './index.scss';
+import { useSearchParams } from 'react-router-dom';
 
 const Card = ({ info }: ApiCardProps) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const applyPopup = (id: string) => {
+    if (searchParams.has('popup')) searchParams.set('popup', id);
+    else searchParams.append('popup', id);
+
+    setSearchParams(searchParams);
+  };
+
   return (
-    <div className="card">
+    <div className="card" onClick={() => applyPopup(info.id.toString())}>
       <div className="card__img">
         <img src={info.image} alt="preview" />
       </div>

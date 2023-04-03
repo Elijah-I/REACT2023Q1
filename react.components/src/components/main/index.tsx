@@ -10,13 +10,17 @@ import cardService from './service';
 import { ApiCard } from 'types/api.card.types';
 
 import './index.scss';
+import Popup from 'components/Popup';
+import CardPreview from 'components/CardPreview';
 
 const Main = () => {
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page') || '1';
   const search = searchParams.get('name') || '';
+  const popup = searchParams.get('popup') || '';
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [card, setCard] = React.useState<ApiCard>();
   const [cards, setCards] = React.useState<ApiCard[]>([]);
 
   React.useEffect(() => {
@@ -32,6 +36,15 @@ const Main = () => {
     loadCards();
   }, [page, search]);
 
+  React.useEffect(() => {
+    const loadCard = async () => {
+      const card = await cardService.uploadCard(popup);
+      setCard(card);
+    };
+
+    loadCard();
+  }, [popup]);
+
   return (
     <div className="main">
       <Search />
@@ -46,6 +59,8 @@ const Main = () => {
           <Pagination totalPages={totalPages} />
         </>
       )}
+
+      {popup && <Popup>{card ? <CardPreview info={card} /> : <Loader />}</Popup>}
     </div>
   );
 };

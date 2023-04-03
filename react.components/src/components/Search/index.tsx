@@ -9,21 +9,21 @@ const Search = () => {
   const [localSearch, setLocalSearch] = useState(search);
 
   const intercaptEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    event.key === 'Enter' && applySearchParams();
+    event.key === 'Enter' && applySearchParams(localSearch);
   };
 
   const dropSearch = () => {
     setLocalSearch('');
-    applySearchParams();
+    applySearchParams('');
   };
 
-  const applySearchParams = () => {
-    if (!localSearch) searchParams.delete('name');
+  const applySearchParams = (search: string) => {
+    if (!search) searchParams.delete('name');
     else {
       searchParams.delete('page');
 
-      if (searchParams.has('name')) searchParams.set('name', localSearch);
-      else searchParams.append('name', localSearch);
+      if (searchParams.has('name')) searchParams.set('name', search);
+      else searchParams.append('name', search);
     }
 
     setSearchParams(searchParams);
@@ -31,7 +31,7 @@ const Search = () => {
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    applySearchParams();
+    applySearchParams(localSearch);
   };
 
   return (

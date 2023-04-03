@@ -20,7 +20,7 @@ const Main = () => {
   const popup = searchParams.get('popup') || '';
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [card, setCard] = React.useState<ApiCard>();
+  const [card, setCard] = React.useState<ApiCard | null>(null);
   const [cards, setCards] = React.useState<ApiCard[]>([]);
 
   React.useEffect(() => {
@@ -42,7 +42,8 @@ const Main = () => {
       setCard(card);
     };
 
-    loadCard();
+    if (popup) loadCard();
+    else setCard(null);
   }, [popup]);
 
   return (

@@ -8,6 +8,11 @@
   box-sizing: border-box;
 }
 
+%box-popup {
+  @extend %box;
+  box-shadow: 2rem 2rem 6rem $primary-color-font, -2rem -2rem 6rem $primary-color-font;
+}
+
 %box-small {
   @extend %box;
   box-shadow: 1rem 1rem 3rem $primary-color-shadow, -1rem -1rem 3rem $secondary-color-shadow;

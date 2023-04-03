@@ -1,38 +1,21 @@
 @import '@/styles/variables';
 @import '@/styles/placeholders';
 
-.pages {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-  padding-bottom: calc($gap * 2);
+.card--full {
+  width: 500px;
+  box-shadow: none;
 }
 
-.page {
-  @extend %box-inset;
+.card--full .card__img {
+  height: 25rem;
+}
 
+.card--full .card__title {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 5rem;
-  height: 5rem;
-  border-radius: 50%;
+  justify-content: space-between;
+  margin-bottom: calc($gap * 1);
 
-  color: $primary-color-font;
-  transition: color 0.2s ease;
-  cursor: pointer;
-  user-select: none;
-
-  &:hover {
-    color: $primary-color-active;
+  i {
+    font-style: normal;
   }
-}
-
-.page--selected {
-  @extend %box-inset-selected;
-
-  cursor: default;
-  pointer-events: none;
-  color: $primary-color-active;
 }

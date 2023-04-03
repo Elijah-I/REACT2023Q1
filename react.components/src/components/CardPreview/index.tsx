@@ -7,7 +7,41 @@ interface CardPreviewProps {
 }
 
 const CardPreview = ({ info }: CardPreviewProps) => {
-  return <div>{info.name}</div>;
+  return (
+    <div className="card card--full">
+      <div className="card__img">
+        <img src={info.image} alt="preview" />
+      </div>
+
+      <div className="card__content">
+        <div className="card__title">
+          {info.name}
+          <i>{info.created.substring(0, 10)}</i>
+        </div>
+        <div className="card__info">
+          <u>species:</u>
+          <b>{info.species}</b>
+        </div>
+        <div className="card__info">
+          <u>gender:</u> <b>{info.gender}</b>
+        </div>
+        <div className="card__info">
+          <u>location:</u> <b>{info.location.name}</b>
+        </div>
+        <div className="card__info">
+          <u>origin:</u> <b>{info.origin.name}</b>
+        </div>
+        <div className="card__info">
+          <u>status:</u> <b>{info.status}</b>
+        </div>
+
+        <div className="card__info">
+          <u>episodes:</u>
+          <b>{info.episode.length}</b>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CardPreview;

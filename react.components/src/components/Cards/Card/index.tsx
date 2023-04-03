@@ -26,10 +26,10 @@ const Card = ({ info }: ApiCardProps) => {
           <b>{info.species}</b>
         </div>
         <div className="card__info">
-          <u>location:</u> <b>{info.location.name}</b>
+          <u>gender:</u> <b>{info.gender}</b>
         </div>
         <div className="card__info">
-          <u>gender:</u> <b>{info.gender}</b>
+          <u>location:</u> <b>{info.location.name}</b>
         </div>
       </div>
     </div>

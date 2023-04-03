@@ -43,7 +43,7 @@
 }
 
 .popup__container {
-  @extend %box;
+  @extend %box-popup;
 
   position: relative;
   z-index: 1;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import { ApiCard, ApiCardsProps } from 'types/api.card.types';
+import { ApiCardsProps } from 'types/api.card.types';
 import './index.scss';
 
 const Cards = ({ cards }: ApiCardsProps) => {

@@ -5,22 +5,18 @@ import Search from 'components/Search';
 import Loader from 'components/Loader';
 import Cards from 'components/Cards';
 
-import { SearchState } from 'types/search.types';
 import { ApiCard } from 'types/api.card.types';
 
 import './index.scss';
 
 const Main = () => {
-  const [search, setSearch] = React.useState<SearchState | null>(null);
   const [cards, setCards] = React.useState<ApiCard[] | null>(null);
-
-  const makeSearch = React.useCallback((searchState: SearchState | null) => {
-    setSearch(searchState || null);
-  }, []);
 
   React.useEffect(() => {
     const loadCards = async () => {
       const [cards, pages] = await cardService.uploadCards();
+      console.log(pages);
+
       setCards(cards);
     };
 
@@ -29,9 +25,9 @@ const Main = () => {
 
   return (
     <div className="main">
-      <Search makeSearch={makeSearch} />
+      <Search />
 
-      {search && cards ? (
+      {cards ? (
         <Cards cards={cards} />
       ) : (
         <div className="main__loader">

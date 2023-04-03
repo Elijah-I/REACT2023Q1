@@ -1,86 +1,39 @@
 import React from 'react';
-import { Form } from 'react-router-dom';
-
-import Spaces from './Spaces';
-import Options from './Options';
-import SearchLine from './SearchLine';
-
-import { OPTION, SearchProps, SPACE } from 'types/search.types';
+import { Form, useSearchParams } from 'react-router-dom';
 
 import './index.scss';
 
-const Search = ({ makeSearch }: SearchProps) => {
-  const initialSearchState = {
-    option: OPTION.ALL,
-    space: SPACE.LOCAL,
-    search: localStorage.getItem('search.state') || '',
+const Search = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get('name') || '';
+
+  const applySearchParams = (search: string) => {
+    if (!search) searchParams.delete('name');
+    else {
+      if (searchParams.has('name')) searchParams.set('name', search);
+      else searchParams.append('name', search);
+    }
+
+    setSearchParams(searchParams);
   };
-
-  const [option, setOption] = React.useState(initialSearchState.option);
-  const [space, setSpace] = React.useState(initialSearchState.space);
-  const [search, setSearch] = React.useState(initialSearchState.search);
-
-  const [searchState, setSearchState] = React.useState(initialSearchState);
-
-  const applySearchParams = () => {
-    setSearchState({
-      option,
-      space,
-      search,
-    });
-  };
-
-  const wait = (milliseconds: number) => {
-    return new Promise((resolve) => {
-      setTimeout(resolve, milliseconds);
-    });
-  };
-
-  const doSearch = React.useCallback(
-    async (event?: React.SyntheticEvent) => {
-      if (event) event.preventDefault();
-      makeSearch(null);
-      await wait(1000);
-      makeSearch(searchState);
-    },
-    [searchState, makeSearch]
-  );
-
-  React.useEffect(() => {
-    const loadSearch = async () => {
-      await doSearch();
-    };
-
-    loadSearch();
-  }, [doSearch]);
-
-  React.useEffect(() => {
-    localStorage.setItem('search.state', search);
-  }, [search]);
 
   return (
-    <Form role="form" onSubmit={applySearchParams}>
+    <Form role="form">
       <div className="search__wrapper">
-        <SearchLine
-          option={option}
-          search={search}
-          setSearch={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setSearch(event.currentTarget.value)
-          }
-        />
-        <div className="search__config">
-          <Spaces
-            space={space}
-            setSpace={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setSpace(event.currentTarget.value as SPACE)
+        <div className="search__line">
+          <div className="icon icon--search icon--all"></div>
+          <input
+            type="text"
+            className="white-box search__input"
+            value={search}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              applySearchParams(event.target.value)
             }
           />
-          <Options
-            option={option}
-            setOption={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setOption(event.currentTarget.value as OPTION)
-            }
-          />
+          {search && <div className="icon icon--drop" onClick={() => applySearchParams('')}></div>}
+          <button type="submit" className="button search__button">
+            SEARCH
+          </button>
         </div>
       </div>
     </Form>

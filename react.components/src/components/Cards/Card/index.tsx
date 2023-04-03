@@ -1,7 +1,5 @@
 import React from 'react';
 import { ApiCardProps } from 'types/api.card.types';
-import viewsImgSrc from '../../../assets/icons/views.svg';
-import likesImgSrc from '../../../assets/icons/likes.svg';
 import './index.scss';
 
 const Card = ({ info }: ApiCardProps) => {

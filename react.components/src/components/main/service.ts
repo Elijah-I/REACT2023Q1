@@ -17,8 +17,6 @@ export default {
     const data = await response.json();
 
     const cards: ApiCard[] = data.results;
-    console.log(cards);
-
     const pages: ApiCard[] = data.info.pages;
 
     return [cards, pages];

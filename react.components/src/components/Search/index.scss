@@ -12,17 +12,17 @@
   padding: calc($gap * 2) $gap;
 }
 
-.search__line,
-.search__config {
+.search__line {
+  position: relative;
   width: 100%;
   max-width: 75rem;
+  display: flex;
+  gap: 3rem;
 }
 
-.search__config {
-  display: none;
-  flex-wrap: wrap;
-  gap: $gap;
-  justify-content: space-between;
+.search__line input {
+  flex: 1 1 100%;
+  padding-left: 5rem;
 }
 
 .icon {
@@ -40,6 +40,28 @@
     display: none;
     visibility: hidden;
   }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.icon--search {
+  position: absolute;
+  left: 1.2rem;
+  top: 1.3rem;
+  pointer-events: none;
+}
+
+.icon--drop {
+  position: absolute;
+  z-index: 2;
+  left: auto;
+  right: 16.4rem;
+  top: 1.3rem;
+  background-image: url('../../assets/icons/drop.svg');
+  cursor: pointer;
+  transition: opacity 0.2s ease;
 
   &:hover {
     opacity: 1;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import cardService from './service';
 import Search from 'components/Search';
@@ -10,19 +10,25 @@ import { ApiCard } from 'types/api.card.types';
 import './index.scss';
 import { useSearchParams } from 'react-router-dom';
 import { useDebounce } from 'use-debounce';
+import Pagination from 'components/Pagination';
 
 const Main = () => {
   const [searchParams] = useSearchParams();
-  const page = searchParams.get('page') || '0';
+  const page = searchParams.get('page') || '1';
   const search = searchParams.get('name') || '';
+  const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const [debouncedSearch] = useDebounce(search, search ? 300 : 0);
-  const [cards, setCards] = React.useState<ApiCard[] | null>(null);
+  const [cards, setCards] = React.useState<ApiCard[]>([]);
 
   React.useEffect(() => {
     const loadCards = async () => {
-      const [cards, pages] = await cardService.uploadCards(page, debouncedSearch);
-      console.log(pages);
+      setIsLoading(true);
+      const [cards, totalPages] = await cardService.uploadCards(page, debouncedSearch);
+
       setCards(cards);
+      setIsLoading(false);
+      setTotalPages(totalPages);
     };
 
     loadCards();
@@ -32,12 +38,15 @@ const Main = () => {
     <div className="main">
       <Search />
 
-      {cards ? (
-        <Cards cards={cards} />
-      ) : (
+      {isLoading ? (
         <div className="main__loader">
           <Loader />
         </div>
+      ) : (
+        <>
+          <Cards cards={cards} />
+          <Pagination totalPages={totalPages} />
+        </>
       )}
     </div>
   );

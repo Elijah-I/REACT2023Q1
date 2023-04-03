@@ -10,6 +10,8 @@ const Search = () => {
   const applySearchParams = (search: string) => {
     if (!search) searchParams.delete('name');
     else {
+      searchParams.delete('page');
+
       if (searchParams.has('name')) searchParams.set('name', search);
       else searchParams.append('name', search);
     }

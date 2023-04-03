@@ -3,7 +3,7 @@ import { ApiCard } from 'types/api.card.types';
 type SearchParams = Record<string, string>;
 
 export default {
-  uploadCards: async (page = '0', search = '') => {
+  uploadCards: async (page = '0', search = ''): Promise<[ApiCard[], number]> => {
     const params: SearchParams = {};
 
     if (page) params.page = page;
@@ -17,8 +17,8 @@ export default {
     const data = await response.json();
 
     const cards: ApiCard[] = data.results;
-    const pages: ApiCard[] = data.info.pages;
+    const totalPages: number = data.info.pages;
 
-    return [cards, pages];
+    return [cards, totalPages];
   },
 };

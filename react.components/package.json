@@ -21,8 +21,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.8",
     "react-router-dom": "^6.8.2",
-    "sort-by": "^0.0.2",
-    "use-debounce": "^9.0.3"
+    "sort-by": "^0.0.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

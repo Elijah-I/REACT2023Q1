@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-import cardService from './service';
+import Pagination from 'components/Pagination';
 import Search from 'components/Search';
 import Loader from 'components/Loader';
 import Cards from 'components/Cards';
+import cardService from './service';
 
 import { ApiCard } from 'types/api.card.types';
 
 import './index.scss';
-import { useSearchParams } from 'react-router-dom';
-import { useDebounce } from 'use-debounce';
-import Pagination from 'components/Pagination';
 
 const Main = () => {
   const [searchParams] = useSearchParams();
@@ -18,13 +17,12 @@ const Main = () => {
   const search = searchParams.get('name') || '';
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [debouncedSearch] = useDebounce(search, search ? 300 : 0);
   const [cards, setCards] = React.useState<ApiCard[]>([]);
 
   React.useEffect(() => {
     const loadCards = async () => {
       setIsLoading(true);
-      const [cards, totalPages] = await cardService.uploadCards(page, debouncedSearch);
+      const [cards, totalPages] = await cardService.uploadCards(page, search);
 
       setCards(cards);
       setIsLoading(false);
@@ -32,7 +30,7 @@ const Main = () => {
     };
 
     loadCards();
-  }, [page, debouncedSearch]);
+  }, [page, search]);
 
   return (
     <div className="main">

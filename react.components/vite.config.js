@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  base: '/REACT2023Q1/react.hooks',
+  base: '/REACT2023Q1/React.API',
   plugins: [react(), tsconfigPaths(), eslint()],
   test: {
     globals: true,

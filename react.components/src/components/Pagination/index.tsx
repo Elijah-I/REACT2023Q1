@@ -33,7 +33,7 @@ const Pagination = ({ totalPages }: PaginationProps) => {
     );
   }
 
-  return <>{pageLinks}</>;
+  return <div className="pages">{pageLinks}</div>;
 };
 
 export default Pagination;

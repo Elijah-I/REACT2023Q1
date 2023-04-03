@@ -9,7 +9,7 @@
   justify-content: center;
   flex-direction: column;
   gap: $gap;
-  padding: calc($gap * 3) $gap;
+  padding: calc($gap * 2) $gap;
 }
 
 .search__line,
@@ -19,7 +19,7 @@
 }
 
 .search__config {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: $gap;
   justify-content: space-between;

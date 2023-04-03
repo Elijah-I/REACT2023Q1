@@ -3,11 +3,11 @@ import { ApiCard } from 'types/api.card.types';
 type SearchParams = Record<string, string>;
 
 export default {
-  uploadCards: async (page = 0, search = '') => {
+  uploadCards: async (page = '0', search = '') => {
     const params: SearchParams = {};
 
+    if (page) params.page = page;
     if (search) params.name = search;
-    if (page) params.page = page.toString();
 
     const searchParams = new URLSearchParams(params);
 

@@ -1,0 +1,12 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+
+.create__form {
+  @extend %box;
+
+  padding: calc($gap * 2);
+  padding-top: $gap;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+}

@@ -1,37 +1,53 @@
 import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
-import { vi } from 'vitest';
-
 import renderWithRouter from 'tests/renderWithRouter';
-import cardService from './service';
+import { vi } from 'vitest';
 import Main from '.';
 
-vi.mock('./service');
-cardService.uploadCards = vi.fn().mockResolvedValue([
-  {
-    id: 0,
-    title: 'Make your site worse',
-    author: 'Elijah',
-    type: 'photo',
-    tags: ['IT', 'SEO', 'Listing'],
-    picture: 'https://www.interfax.ru/ftproot/textphotos/2022/06/14/tt700.jpg',
-    statistic: { views: 524, likes: 17, isFavorite: true },
-  },
-  {
-    id: 1,
-    title: 'Rest',
-    author: 'Sam',
-    type: 'video',
-    tags: ['Nature', 'Sun', 'Sea', 'Beach'],
-    picture:
-      'https://w0.peakpx.com/wallpaper/23/442/HD-wallpaper-nature-sea-sky-skyline-sun-tree-nature-trees-sun-skyline-sea-sky.jpg',
-    statistic: {
-      views: 11585,
-      likes: 2585,
-      isFavorite: false,
-    },
-  },
-]);
+global.fetch = vi.fn(() =>
+  Promise.resolve({
+    json: () =>
+      Promise.resolve({
+        info: { pages: 1 },
+        results: [
+          {
+            created: '2017-11-04T18:48:46.250Z',
+            episode: [
+              'https://rickandmortyapi.com/api/episode/1',
+              'https://rickandmortyapi.com/api/episode/2',
+            ],
+            gender: 'Male',
+            id: 1,
+            image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+            location: { name: 'Citadel of Ricks', url: '' },
+            name: 'Rick Sanchez',
+            origin: { name: 'Earth (C-137)', url: '' },
+            species: 'Human',
+            status: 'Alive',
+            type: '',
+            url: 'https://rickandmortyapi.com/api/character/1',
+          },
+          {
+            created: '2017-11-04T18:50:21.651Z',
+            episode: [
+              'https://rickandmortyapi.com/api/episode/1',
+              'https://rickandmortyapi.com/api/episode/2',
+            ],
+            gender: 'Male',
+            id: 2,
+            image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+            location: { name: 'Citadel of Ricks', url: '' },
+            name: 'Morty Smith',
+            origin: { name: 'unknown', url: '' },
+            species: 'Human',
+            status: 'Alive',
+            type: '',
+            url: 'https://rickandmortyapi.com/api/character/2',
+          },
+        ],
+      }),
+  })
+) as unknown as typeof global.fetch;
 
 describe('Main', () => {
   it('renders Search component', async () => {

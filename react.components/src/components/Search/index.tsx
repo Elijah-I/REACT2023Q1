@@ -8,6 +8,21 @@ const Search = () => {
   const search = searchParams.get('name') || '';
   const [localSearch, setLocalSearch] = useState(search);
 
+  React.useEffect(() => {
+    const storedSearch = localStorage.getItem('search');
+
+    const page = searchParams.get('page');
+    const popup = searchParams.get('popup');
+
+    if (!storedSearch) return;
+    if (search || page || popup) return;
+
+    searchParams.append('name', storedSearch);
+    setSearchParams(searchParams);
+    setLocalSearch(storedSearch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const intercaptEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.key === 'Enter' && applySearchParams(localSearch);
   };
@@ -27,6 +42,7 @@ const Search = () => {
     }
 
     setSearchParams(searchParams);
+    localStorage.setItem('search', search);
   };
 
   const handleSubmit = (event: React.SyntheticEvent) => {

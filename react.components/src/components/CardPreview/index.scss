@@ -1,0 +1,21 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+
+.card--full {
+  width: 500px;
+  box-shadow: none;
+}
+
+.card--full .card__img {
+  height: 25rem;
+}
+
+.card--full .card__title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: calc($gap * 1);
+
+  i {
+    font-style: normal;
+  }
+}

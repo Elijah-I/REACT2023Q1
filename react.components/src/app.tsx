@@ -1,0 +1,42 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import {
+  RouterProvider,
+  createHashRouter,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom';
+
+import Root from 'components/Root';
+import Error from 'components/Error';
+import Main from 'components/Main';
+import About from 'components/About';
+import Create from 'components/Create';
+
+import ROUTES from 'types/routes.types';
+
+import './styles/app.scss';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
+
+const router = createHashRouter(
+  createRoutesFromElements(
+    <Route path={ROUTES.ROOT} element={<Root />}>
+      <Route index element={<Main />} />
+      <Route path={ROUTES.ABOUT} element={<About />} />
+      <Route path={ROUTES.CREATE} element={<Create />} />
+      <Route path="/*" element={<Error />} />
+    </Route>
+  )
+);
+
+const App = () => (
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);
+
+const root = document.getElementById('root');
+if (root) ReactDOM.createRoot(root).render(<App />);
+
+export default App;

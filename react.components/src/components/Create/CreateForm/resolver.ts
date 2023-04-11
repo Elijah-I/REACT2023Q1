@@ -11,7 +11,6 @@ export const resolver: Resolver<FormValues> = async (values) => {
     const file = files ? files[0] : null;
     const picture = file ? URL.createObjectURL(file) : '';
 
-    // eslint-disable-next-line no-unused-vars
     const { file: _, ...clone } = values;
 
     const card: Card = {

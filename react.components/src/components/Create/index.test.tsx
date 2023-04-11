@@ -1,14 +1,14 @@
-import React from 'react';
 import 'jsdom-worker';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import Create from '.';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
+import renderWithProvider from 'tests/renderWithProvider';
 import { OPTION } from 'types/search.types';
+import Create from '.';
 
 describe('Create', () => {
   const mockFilePng = new File(['test'], 'test.png', { type: 'image/png' });
 
   it('renders Create component', () => {
-    render(<Create />);
+    renderWithProvider(Create);
 
     expect(screen.getByText(/title/i)).toBeInTheDocument();
     expect(screen.getByText(/tags/i)).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe('Create', () => {
   });
 
   it('creates card on submit', async () => {
-    const { container } = render(<Create />);
+    const { container } = renderWithProvider(Create);
 
     await waitFor(() => {
       fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 'mock card title' } });
@@ -50,7 +50,7 @@ describe('Create', () => {
   });
 
   it('shows and hide (after 3 sec delay) Popup on submit', async () => {
-    const { container } = render(<Create />);
+    const { container } = renderWithProvider(Create);
 
     await waitFor(() => {
       fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 'mock card title' } });

@@ -26,3 +26,18 @@ export interface ApiCard {
   url: string;
   created: string;
 }
+
+export interface ApiCardsResponse {
+  info: {
+    count: number;
+    next: string;
+    pages: number;
+    prev: null | string;
+  };
+  results: ApiCard[];
+}
+
+export interface GetCardsResponse {
+  cards: ApiCard[];
+  totalPages: number;
+}

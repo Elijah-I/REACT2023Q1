@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Pagination from 'components/Pagination';
@@ -9,41 +9,22 @@ import cardService from './service';
 
 import { ApiCard } from 'types/api.card.types';
 
-import './index.scss';
 import Popup from 'components/Popup';
 import CardPreview from 'components/CardPreview';
+import { cardsAPI } from 'store/cards/cards.api';
+import './index.scss';
 
 const Main = () => {
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page') || '1';
   const search = searchParams.get('name') || '';
   const popup = searchParams.get('popup') || '';
-  const [totalPages, setTotalPages] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const [card, setCard] = React.useState<ApiCard | null>(null);
-  const [cards, setCards] = React.useState<ApiCard[]>([]);
+  const [getCard, { data: card }] = cardsAPI.useLazyGetCardQuery();
+  const { isLoading, data: cardsData } = cardsAPI.useGetCardsQuery({ page, search });
+  const { cards, totalPages } = cardsData || { cards: [], totalPages: 0 };
 
   React.useEffect(() => {
-    const loadCards = async () => {
-      setIsLoading(true);
-      const [cards, totalPages] = await cardService.uploadCards(page, search);
-
-      setCards(cards);
-      setIsLoading(false);
-      setTotalPages(totalPages);
-    };
-
-    loadCards();
-  }, [page, search]);
-
-  React.useEffect(() => {
-    const loadCard = async () => {
-      const card = await cardService.uploadCard(popup);
-      setCard(card);
-    };
-
-    if (popup) loadCard();
-    else setCard(null);
+    if (popup) getCard(popup);
   }, [popup]);
 
   return (

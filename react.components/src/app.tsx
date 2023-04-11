@@ -16,6 +16,8 @@ import Create from 'components/Create';
 import ROUTES from 'types/routes.types';
 
 import './styles/app.scss';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
 
 const router = createHashRouter(
   createRoutesFromElements(
@@ -28,7 +30,11 @@ const router = createHashRouter(
   )
 );
 
-const App = () => <RouterProvider router={router} />;
+const App = () => (
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);
 
 const root = document.getElementById('root');
 if (root) ReactDOM.createRoot(root).render(<App />);

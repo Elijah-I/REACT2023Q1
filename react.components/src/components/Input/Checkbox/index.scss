@@ -7,7 +7,8 @@
   padding-top: calc($gap / 1.6) !important;
 
   input {
-    display: none;
+    position: absolute;
+    opacity: 0;
   }
 
   label {

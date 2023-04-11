@@ -11,8 +11,8 @@ interface InputCheckboxProps {
 }
 
 const InputCheckbox = ({ error, name, register, labelText }: InputCheckboxProps) => {
-  const titleClassName = ['input__label'];
   const uniqID = `cb-${Date.now()}`;
+  const titleClassName = ['input__label'];
   if (error) titleClassName.push('input__label--error');
 
   return (

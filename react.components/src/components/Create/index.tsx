@@ -7,9 +7,12 @@ import Popup from './Popup';
 import { Card } from 'types/card.types';
 
 import './index.scss';
+import { useTypedSelector } from 'hooks/useTypedSelector';
+import { useActions } from 'hooks/useActions';
 
 const Create = () => {
-  const [cards, setCards] = React.useState<Card[]>([]);
+  const { addCard } = useActions();
+  const cards = useTypedSelector((state) => state.form.cards);
   const [showPopup, setShowPopup] = React.useState(false);
 
   const wait = (milliseconds: number) => {
@@ -31,7 +34,7 @@ const Create = () => {
 
   const onCreate = (card: Card) => {
     setShowPopup(true);
-    setCards([...cards, card]);
+    addCard(card);
   };
 
   return (

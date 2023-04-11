@@ -19,13 +19,11 @@ const Main = () => {
   const page = searchParams.get('page') || '1';
   const search = searchParams.get('name') || '';
   const popup = searchParams.get('popup') || '';
-  const [getCard, { data: card }] = cardsAPI.useLazyGetCardQuery();
+  const { data: card } = cardsAPI.useGetCardQuery(popup, {
+    skip: !popup,
+  });
   const { isLoading, data: cardsData } = cardsAPI.useGetCardsQuery({ page, search });
   const { cards, totalPages } = cardsData || { cards: [], totalPages: 0 };
-
-  React.useEffect(() => {
-    if (popup) getCard(popup);
-  }, [popup]);
 
   return (
     <div className="main">

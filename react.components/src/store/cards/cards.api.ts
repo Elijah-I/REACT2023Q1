@@ -29,10 +29,14 @@ export const cardsAPI = api.injectEndpoints({
         cards: response.results,
         totalPages: response.info.pages,
       }),
+      providesTags: (result, error, getParams) => [
+        { type: 'Cards', id: `${getParams.page}-${getParams.search}` },
+      ],
     }),
 
     getCard: builder.query({
       query: (id) => `/character/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Cards', id }],
     }),
   }),
 });

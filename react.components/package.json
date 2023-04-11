@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://elijah-i.github.io/REACT2023Q1/React.API/",
+  "homepage": "https://elijah-i.github.io/REACT2023Q1/React.Redux/",
   "scripts": {
     "dev": "vite",
     "test": "vitest",
@@ -11,7 +11,7 @@
     "coverage": "vitest run --coverage",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && npx gh-pages -d dist -e React.API"
+    "deploy": "npm run build && npx gh-pages -d dist -e React.Redux"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",

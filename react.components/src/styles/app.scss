@@ -1,8 +1,6 @@
 @import '@/styles/variables';
 @import '@/styles/placeholders';
-@import 'node_modules/normalize-scss/sass/normalize';
-
-@include normalize();
+@import '@/styles/normalize';
 
 html {
   font-size: 10px;

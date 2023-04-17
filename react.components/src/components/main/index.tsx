@@ -5,9 +5,6 @@ import Pagination from 'components/Pagination';
 import Search from 'components/Search';
 import Loader from 'components/Loader';
 import Cards from 'components/ApiCards';
-import cardService from './service';
-
-import { ApiCard } from 'types/api.card.types';
 
 import Popup from 'components/Popup';
 import CardPreview from 'components/CardPreview';

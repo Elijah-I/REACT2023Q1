@@ -51,7 +51,7 @@ const Search = () => {
   };
 
   return (
-    <Form role="form" onSubmit={handleSubmit}>
+    <form role="form" onSubmit={handleSubmit}>
       <div className="search__wrapper">
         <div className="search__line">
           <div className="icon icon--search icon--all"></div>
@@ -68,7 +68,7 @@ const Search = () => {
           </button>
         </div>
       </div>
-    </Form>
+    </form>
   );
 };
 

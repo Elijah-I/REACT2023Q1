@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from './Card';
-import type { Card as ICard, CardsProps } from 'types/card.types';
+import { ApiCardsProps } from 'types/api.card.types';
 import './index.scss';
 
-const Cards = ({ cards }: CardsProps) => {
+const Cards = ({ cards }: ApiCardsProps) => {
   if (!cards.length) {
     return <div className="cards__null">no cards found</div>;
   }

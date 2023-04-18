@@ -7,7 +7,6 @@ export interface Statistic {
 }
 
 export interface CardsProps {
-  search?: SearchState;
   cards: Card[];
 }
 

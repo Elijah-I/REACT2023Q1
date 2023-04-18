@@ -5,6 +5,7 @@
     "lib": ["dom", "esnext", "dom.iterable"],
     "jsx": "react-jsx",
     "module": "esnext",
+    "types": ["cypress", "cypress-file-upload"],
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,

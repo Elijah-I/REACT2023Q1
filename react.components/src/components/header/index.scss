@@ -1,0 +1,43 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+
+.header {
+  width: 100%;
+  padding-top: $gap;
+}
+
+.header__container {
+  @extend %box;
+  @extend %font-upper;
+
+  position: relative;
+  height: $header-h;
+  display: flex;
+  gap: $gap;
+  padding: 0 $gap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header__link {
+  color: $primary-color-font;
+  text-decoration: none;
+  transition: color 0.1s ease;
+
+  &:hover {
+    color: $primary-color-active;
+  }
+}
+
+.header__link--active {
+  color: $primary-color-active;
+  pointer-events: none;
+  cursor: default;
+}
+
+.page__title {
+  @extend %font-upper;
+  color: $secondary-color-active;
+  position: absolute;
+  left: $gap;
+}

@@ -1,0 +1,41 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+
+input {
+  outline: none;
+}
+
+.input--padded-right {
+  padding-right: calc($gap / 2);
+}
+
+.input__label {
+  @extend %box-inset-small;
+  @extend %font-upper;
+
+  display: inline;
+  position: absolute;
+  left: calc($gap / 2);
+  top: calc($gap / -2);
+  font-size: 1rem;
+  border-radius: 2px;
+  background-color: $primary-color-fone;
+  padding: calc($gap / 8 - 2px) calc($gap / 3) calc($gap / 8) calc($gap / 3);
+
+  // .input__label--error
+  &--error {
+    color: $primary-color-error;
+  }
+
+  // .input__label--error + .white-box
+  &--error + .white-box {
+    box-shadow: 0 0 10px 0 transparentize($primary-color-error, $amount: 0.5);
+  }
+}
+
+.input__element {
+  flex: 1 0 25%;
+  min-width: 18rem !important;
+  position: relative;
+  margin-top: $gap;
+}

@@ -1,0 +1,93 @@
+@import '@/styles/variables';
+@import '@/styles/placeholders';
+@import '@/styles/normalize';
+
+html {
+  font-size: 10px;
+}
+
+body {
+  @extend %font-lower;
+
+  overflow: hidden overlay;
+
+  height: 100vh;
+  background-color: $primary-color-fone;
+}
+
+::-webkit-scrollbar {
+  width: 1.4rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba($primary-color-active, 0.5);
+  border-radius: 0.7rem;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: $max-w;
+  box-sizing: border-box;
+  padding: 0 $gap;
+  margin: 0 auto;
+}
+
+.white-box {
+  @extend %font-lower;
+
+  width: 100%;
+  height: 100%;
+  min-height: 5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  min-width: 1.6rem;
+  padding-left: 1.4rem;
+  padding-bottom: 0.3rem;
+  outline: none;
+  box-sizing: border-box;
+  background-color: $secondary-color-shadow;
+}
+
+.button {
+  @extend %box-inset;
+  @extend %font-upper;
+
+  height: 5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0 $gap;
+  box-sizing: border-box;
+  padding-bottom: 0.2rem;
+  color: $primary-color-font;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: $primary-color-active;
+  }
+
+  // .button--loading
+  &--loading {
+    filter: grayscale(100%);
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+.delimiter {
+  width: 100%;
+  height: 1px;
+  border-top: 1px dotted $secondary-color-active;
+  box-sizing: border-box;
+  margin: $gap 0;
+}
